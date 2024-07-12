@@ -4,7 +4,7 @@ import { Carousel } from "flowbite-react";
 
 export function Header() {
   return (
-    <div className="h-56  mb-5 sm:h-64 xl:h-48 2xl:h-96">
+    <div className=" h-56  mb-5 sm:h-64 xl:h-48 2xl:h-96">
       <Carousel
       >
         <div className="flex  rounded-lg  h-full items-center justify-center bg-white dark:bg-gray-700 dark:text-white">

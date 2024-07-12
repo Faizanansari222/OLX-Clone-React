@@ -3,6 +3,7 @@ import { Header } from "../../Component/Header";
 import NavBar from "../../Component/NavBar";
 import Category from "../../Component/Category";
 import { useNavigate } from "react-router-dom";
+import Footer from "../../Component/Footer";
 
 function Dashboard() {
   const [heartActive, setHeartActive] = useState(true);
@@ -32,7 +33,7 @@ function Dashboard() {
             const { id, price, title, description, image } = item;
             return (
               <>
-                <div onClick={(id)=>{
+                <div onClick={()=>{
                   navigate(`/detail/${id}`)
                 }} className=" h-70 overflow-y-hidden ">
                   <div className="border h-full m-auto shadow-lg container rounded ">
@@ -97,6 +98,7 @@ function Dashboard() {
           })}
         </div>
       </div>
+          <Footer/>
     </>
   );
 }

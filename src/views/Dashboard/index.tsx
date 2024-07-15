@@ -4,10 +4,13 @@ import NavBar from "../../Component/NavBar";
 import Category from "../../Component/Category";
 import { useNavigate } from "react-router-dom";
 import Footer from "../../Component/Footer";
+import Login from "../../Component/Login";
+import { isVisible } from "@testing-library/user-event/dist/utils";
 
 function Dashboard() {
   const [heartActive, setHeartActive] = useState(true);
   const [products, setProducts] = useState([]);
+  const [showLogin, setShowLogin] = useState (false)
   const navigate = useNavigate();
   useEffect(() => {
     fetch("https://fakestoreapi.com/products")
@@ -24,8 +27,9 @@ function Dashboard() {
 
   return (
     <>
+        <Login isVisible={showLogin} onClose={()=>{setShowLogin(false)}}/>
       <div className="p-5 ">
-        <NavBar />
+        <NavBar  onClick={() => setShowLogin(true)}/>
         <Header />
         <Category />
         <div className="  grid grid-cols-4 gap-5  ">

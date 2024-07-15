@@ -1,7 +1,8 @@
 import React from "react";
 import logo from "./Image/OLX-Symbol.png";
 
-export default function NavBar() {
+export default function NavBar(props) {
+  const { onClick } = props;
   return (
     <>
       <div>
@@ -141,7 +142,7 @@ export default function NavBar() {
             </div>
             <div className="flex items-center  gap-3">
               <span className="hover:border-b-white  border-b-2  border-[#002f34]">
-                <button className=" font-bold  text-[#002f34] hover:border-none">
+                <button onClick={onClick} className=" font-bold  text-[#002f34] hover:border-none">
                   Login
                 </button>
               </span>

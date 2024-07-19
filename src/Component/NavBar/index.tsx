@@ -1,7 +1,7 @@
 import React from "react";
 import logo from "./Image/OLX-Symbol.png";
 
-export default function NavBar(props) {
+export default function NavBar(props:any) {
   const { onClick } = props;
   return (
     <>

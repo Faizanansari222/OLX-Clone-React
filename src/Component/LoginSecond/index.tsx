@@ -1,62 +1,22 @@
 import React, { useState } from "react";
 import Logo from "./image/logo.png";
-import Swal from "sweetalert2";
 import GoogleBtn from "./image/Google.png";
 import FBBtn from "./image/Facebook.png";
-import { regisFun } from "../../Config/firebase";
-// import { RegisFun } from "../../Config/firebase";
-// import { log } from "console";
+import { loginFun } from "../../Config/firebase";
+import Swal from "sweetalert2";
 
-interface LoginProps {
-  isVisible: boolean;
-  onClose: () => void;
-  loginIsVisible: boolean;
-}
-
-export const Register: React.FC<LoginProps> = ({
-  isVisible,
-  onClose,
-  loginIsVisible,
-}) => {
-  const [name, setName] = useState("");
+function LoginSecond({ onClose, loginIsVisible, isVisible, onClick }: any) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  if (!isVisible) return null;
-  const handleClose = (e: any) => {
-    if (e.target.id === "wrapper") onClose();
-  };
-
-  const regisBtn = async (e: any) => {
-    try {
-      e.preventDefault();
-      await regisFun(email, password);
-      // const user = userCredential.user;
-      Swal.fire({
-        // position: "center",
-        icon: "success",
-        title: "You are Succsessfully Registered",
-        showConfirmButton: false,
-        timer: 1500,
-      });
-    } catch (err: any) {
-      Swal.fire({
-        icon: "error",
-        title: "Oops...",
-        text: "Enter Vaild Email or Password",
-        // footer: '<a href="#">Why do I have this issue?</a>'
-      });
-    }
-  };
 
   return (
     <div
-      onClick={handleClose}
       id="wrapper"
-      className=" fixed inset-0 z-50 bg-black bg-opacity-15 cursor-all-scroll backdrop-blur-sm shadow-sm flex justify-center items-center"
+      className="fixed inset-0 z-50 bg-black bg-opacity-15 cursor-all-scroll backdrop-blur-sm shadow-sm flex justify-center items-center"
     >
-      <div className=" w-1/3  sm:w-[400px]">
+      <div className=" w-1/3 sm:w-[400px]">
         {/* <!-- component --> */}
-        <div className="bg-[#002f34] my-10  text-white flex h-[600px]  rounded-xl flex-col items-center sm:justify-center sm:pt-0">
+        <div className="bg-[#002f34] text-white flex h-[600px]  rounded-xl flex-col items-center sm:justify-center sm:pt-0">
           <div className="flex items-center justify-center mr-4 w-3 h-3 place-self-end">
             <button
               onClick={onClose}
@@ -66,13 +26,13 @@ export const Register: React.FC<LoginProps> = ({
             </button>
           </div>
           <div className="text-foreground font-semibold text-2xl tracking-tighter mx-auto  gap-2">
-            <img className="w-16 m-auto mb-1 sm:w-16" src={Logo} alt="Logo" />
+            <img className="w-28 m-auto mb-3 sm:w-20" src={Logo} alt="Logo" />
 
-            <h1 className="text-xl sm:text-2xl text-white mb-1 sm:mb-1 ">
-              Create a new <span className="font-bold">OLX</span> account
+            <h1 className="text-3xl sm:text-2xl text-white mb-2 sm:mb-1 ">
+              Login into your <span className="font-bold">OLX</span> account
             </h1>
           </div>
-          <div className="flex items-center px-5 mt-1 h-10 w-full gap-3">
+          <div className="flex items-center px-5 mt-2 h-12 w-full gap-3">
             <a>
               <img
                 className="cursor-pointer hover:border-2 hover:border-white rounded-md"
@@ -89,12 +49,12 @@ export const Register: React.FC<LoginProps> = ({
             </a>
           </div>
 
-          <div className="relative  w-full max-w-lg sm:mt-3">
+          <div className="relative mt-2 w-full max-w-lg sm:mt-6">
             <div className="relative -mb-px h-px w-full bg-gradient-to-r from-transparent via-sky-300 to-transparent"></div>
             <div className="mx-5 border dark:border-b-white/50 dark:border-t-white/50 border-b-white/20 sm:border-t-white/20 shadow-[20px_0_20px_20px] shadow-slate-500/10 dark:shadow-white/20 rounded-lg border-white/20 border-l-white/20 border-r-white/20 sm:shadow-sm lg:rounded-xl lg:shadow-none">
-              <div className="flex flex-col p-4">
+              <div className="flex flex-col p-6">
                 <h3 className="text-xl font-semibold leading-6 tracking-tighter">
-                  Registration
+                  Login
                 </h3>
                 <p className="mt-1.5 text-sm font-medium text-white/50">
                   Welcome back, enter your credentials to continue.
@@ -102,29 +62,12 @@ export const Register: React.FC<LoginProps> = ({
               </div>
               <div className="p-6 pt-0">
                 <form>
-                  <div className="space-y-4">
+                  <div>
                     <div>
                       <div className="group relative rounded-lg border focus-within:border-sky-200 px-3 pb-1.5 pt-2.5 duration-200 focus-within:ring focus-within:ring-sky-300/30">
                         <div className="flex justify-between">
                           <label className="text-xs font-medium text-muted-foreground group-focus-within:text-white text-gray-400">
-                            User Name{" "}
-                          </label>
-                          <div className="absolute right-3 translate-y-2 text-green-200"></div>
-                        </div>
-                        <input
-                          onChange={(e) => setName(e.target.value)}
-                          type="text"
-                          name="useremail"
-                          placeholder="username"
-                          className="block w-full border-0 bg-transparent p-0 text-sm file:my-1 file:rounded-full file:border-0 file:bg-accent file:px-4 file:py-2 file:font-medium placeholder:text-muted-foreground/90 focus:outline-none focus:ring-0 sm:leading-7 text-foreground"
-                        />
-                      </div>
-                    </div>
-                    <div>
-                      <div className="group relative rounded-lg border focus-within:border-sky-200 px-3 pb-1.5 pt-2.5 duration-200 focus-within:ring focus-within:ring-sky-300/30">
-                        <div className="flex justify-between">
-                          <label className="text-xs font-medium text-muted-foreground group-focus-within:text-white text-gray-400">
-                            Useremail{" "}
+                            Username
                           </label>
                           <div className="absolute right-3 translate-y-2 text-green-200"></div>
                         </div>
@@ -132,7 +75,7 @@ export const Register: React.FC<LoginProps> = ({
                           onChange={(e) => setEmail(e.target.value)}
                           type="text"
                           name="useremail"
-                          placeholder="useremail"
+                          placeholder="Useremail"
                           className="block w-full border-0 bg-transparent p-0 text-sm file:my-1 file:rounded-full file:border-0 file:bg-accent file:px-4 file:py-2 file:font-medium placeholder:text-muted-foreground/90 focus:outline-none focus:ring-0 sm:leading-7 text-foreground"
                         />
                       </div>
@@ -157,7 +100,7 @@ export const Register: React.FC<LoginProps> = ({
                       </div>
                     </div>
                   </div>
-                  <div className="mt-2 flex items-center justify-between">
+                  <div className="mt-4 flex items-center justify-between">
                     <label className="flex items-center gap-2">
                       <input
                         type="checkbox"
@@ -173,21 +116,21 @@ export const Register: React.FC<LoginProps> = ({
                       Forgot password?
                     </a>
                   </div>
-
-                  <div className="mt-2 flex items-center justify-end ">
+                  <div className="mt-4 flex items-center justify-end gap-x-2">
                     <button
-                      onClick={regisBtn}
-                      className="my-3 font-semibold hover:bg-black hover:text-white hover:ring hover:ring-white transition duration-300 inline-flex items-center justify-center rounded-md text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-white text-black h-10 px-4 py-2"
-                      type="submit"
+                      onClick={(e: any) => {
+                        e.preventDefault();
+
+                        onClick();
+                      }}
                     >
                       Register
                     </button>
-                  </div>
-                  <div className="flex justify-center items-center mt-2 text-sm font-normal text-foreground">
-                    Already have an Account?{" "}
-                    <button className="text-base font-medium text-foreground underline">
-                      {" "}
-                      Login
+                    <button
+                      className="font-semibold hover:bg-black hover:text-white hover:ring hover:ring-white transition duration-300 inline-flex items-center justify-center rounded-md text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-white text-black h-10 px-4 py-2"
+                      type="submit"
+                    >
+                      Log in
                     </button>
                   </div>
                 </form>
@@ -198,4 +141,6 @@ export const Register: React.FC<LoginProps> = ({
       </div>
     </div>
   );
-};
+}
+
+export default LoginSecond;

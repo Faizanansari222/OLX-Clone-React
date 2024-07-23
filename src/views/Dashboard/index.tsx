@@ -4,15 +4,17 @@ import NavBar from "../../Component/NavBar";
 import Category from "../../Component/Category";
 import { useNavigate } from "react-router-dom";
 import Footer from "../../Component/Footer";
-import Login from "../../Component/Login";
-import { isVisible } from "@testing-library/user-event/dist/utils";
+// import Login from "../../Component/Login";
+// import { isVisible } from "@testing-library/user-event/dist/utils";
 import { Register } from "../../Component/Register";
+import Login from "../../Component/Login";
+import LoginSecond from "../../Component/LoginSecond";
 
 function Dashboard() {
   const [heartActive, setHeartActive] = useState(true);
   const [products, setProducts] = useState([]);
-  const [showLogin, setShowLogin] = useState (false)
-  const [showRegis, setShowRegis] = useState (false)
+  const [showLogin, setShowLogin] = useState(false);
+  const [showRegis, setShowRegis] = useState(false);
   const navigate = useNavigate();
   useEffect(() => {
     fetch("https://fakestoreapi.com/products")
@@ -29,10 +31,26 @@ function Dashboard() {
 
   return (
     <>
-        <Login isVisible={showLogin} onClick={() =>  setShowRegis(true)} onClose={()=>{setShowLogin(false)}}/>
-        <Register isVisible={showRegis} onClose={()=>{setShowLogin(false)}}/>
+    <LoginSecond isVisible={showLogin} onClick={() => setShowRegis(true)}  onClose={() => {
+          setShowLogin(false);
+        }}/>
+
+      {/* <Login
+        isVisible={showLogin}
+        onClick={() => setShowRegis(true)}
+        onClose={() => {
+          setShowLogin(false);
+        }}
+      /> */}
+      <Register
+        isVisible={showRegis}
+        loginIsVisible={!showLogin}
+        onClose={() => {
+          setShowRegis(false);
+        }}
+      />
       <div className="p-5 ">
-        <NavBar  onClick={() => setShowLogin(true)}/>
+        <NavBar onClick={() => setShowRegis(true)} />
         <Header />
         <Category />
         <div className="  grid grid-cols-4 gap-5  ">
@@ -40,9 +58,12 @@ function Dashboard() {
             const { id, price, title, description, image } = item;
             return (
               <>
-                <div onClick={()=>{
-                  navigate(`/detail/${id}`)
-                }} className=" h-70 overflow-y-hidden ">
+                <div
+                  onClick={() => {
+                    navigate(`/detail/${id}`);
+                  }}
+                  className=" h-70 overflow-y-hidden "
+                >
                   <div className="border h-full m-auto shadow-lg container rounded ">
                     <div key={id} className="w-full   overflow-hidden">
                       <div className="flex pb-3 items-center justify-center    h-28 m-5">
@@ -105,7 +126,7 @@ function Dashboard() {
           })}
         </div>
       </div>
-          <Footer/>
+      <Footer />
     </>
   );
 }

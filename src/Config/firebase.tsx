@@ -1,5 +1,5 @@
 import { initializeApp } from "firebase/app";
-import Swal from "sweetalert2";
+
 import {
   getAuth,
   createUserWithEmailAndPassword,
@@ -20,44 +20,14 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 
-export const loginFun = async (email: any, password: any) => {
-  await signInWithEmailAndPassword(auth, email, password)
-    .then((userCredential) => {
+export const loginFun = (email: any, password: any) => {
+  return signInWithEmailAndPassword(auth, email, password)
     
-      const user = userCredential.user;
-      Swal.fire({
-        // position: "center",
-        icon: "success",
-        title: "You are Succsessfully logged in",
-        showConfirmButton: false,
-        timer: 1500
-      });// navigate("/");
-      // ...
-    })
-    .catch((error) => {
-      const errorCode = error.code;
-      const errorMessage = error.message;
-      Swal.fire({
-        icon: "error",
-        title: "Oops...",
-        text: errorMessage,
-        // footer: '<a href="#">Why do I have this issue?</a>'
-
-      });});
 };
 
 // const analytics = getAnalytics(app);
 
 export const regisFun = (email: string, password: string) => {
-  createUserWithEmailAndPassword(auth, email, password)
-    .then((userCredential) => {
-      // Signed up
-      const user = userCredential.user;
-      // ...
-    })
-    .catch((error) => {
-      const errorCode = error.code;
-      const errorMessage = error.message;
-      // ..
-    });
+  return createUserWithEmailAndPassword(auth, email, password)
+   
 };

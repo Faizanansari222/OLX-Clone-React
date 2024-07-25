@@ -4,11 +4,45 @@ import GoogleBtn from "./image/Google.png";
 import FBBtn from "./image/Facebook.png";
 import { loginFun } from "../../Config/firebase";
 import Swal from "sweetalert2";
+// import { useNavigate } from "react-router-dom";
 
-function LoginSecond({ onClose, loginIsVisible, isVisible, onClick }: any) {
+function LoginSecond({
+  onClose,
+  loginIsVisible,
+  isVisible,
+  onClick,
+  loginClose,
+}: any) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
+  if (!isVisible) return null;
+  // const navigate = useNavigate();
+
+  const loginBtn = async (e: any) => {
+    try {
+      e.preventDefault();
+      await loginFun(email, password);
+      
+      
+      Swal.fire({
+        icon: "success",
+        title: "You are Succsessfully Login",
+        showConfirmButton: false,
+      });
+    } catch (err: any) {
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: err.message,
+        // footer: '<a href="#">Why do I have this issue?</a>'
+      });
+    }
+  };
+
+  const handleClose = (e: any) => {
+    if (e.target.id === "wrapper") onClose();
+  };
   return (
     <div
       id="wrapper"
@@ -122,11 +156,13 @@ function LoginSecond({ onClose, loginIsVisible, isVisible, onClick }: any) {
                         e.preventDefault();
 
                         onClick();
+                        loginClose();
                       }}
                     >
                       Register
                     </button>
                     <button
+                      onClick={loginBtn}
                       className="font-semibold hover:bg-black hover:text-white hover:ring hover:ring-white transition duration-300 inline-flex items-center justify-center rounded-md text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-white text-black h-10 px-4 py-2"
                       type="submit"
                     >

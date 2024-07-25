@@ -1,8 +1,11 @@
 import React from "react";
 import logo from "./Image/OLX-Symbol.png";
+import { useNavigate } from "react-router-dom";
 
 export default function NavBar(props:any) {
   const { onClick } = props;
+const navigate = useNavigate()
+
   return (
     <>
       <div>
@@ -152,7 +155,7 @@ export default function NavBar(props:any) {
                   src="https://www.olx.com.pk/assets/iconSellBorder_noinline.d9eebe038fbfae9f90fd61d971037e02.svg"
                   alt=""
                 />
-                <button className="z-30 absolute gap-1 p-2  flex items-center font-bold text-base text-[#002f34]">
+                <button onClick={()=>{navigate('/addproduct')}} className="z-30 absolute gap-1 p-2  flex items-center font-bold text-base text-[#002f34]">
                   <svg
                     className="font-bold "
                     xmlns="http://www.w3.org/2000/svg"

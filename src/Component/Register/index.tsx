@@ -11,7 +11,7 @@ interface LoginProps {
   isVisible: boolean;
   onClose: () => void;
   loginIsVisible: boolean;
-}
+  }
 
 export const Register: React.FC<LoginProps> = ({
   isVisible,
@@ -27,22 +27,22 @@ export const Register: React.FC<LoginProps> = ({
   };
 
   const regisBtn = async (e: any) => {
+    e.preventDefault();
     try {
-      e.preventDefault();
-      await regisFun(email, password);
+      await regisFun(email, name, password );
       // const user = userCredential.user;
       Swal.fire({
         // position: "center",
         icon: "success",
         title: "You are Succsessfully Registered",
         showConfirmButton: false,
-        timer: 1500,
+        timer: 1000,
       });
     } catch (err: any) {
       Swal.fire({
         icon: "error",
         title: "Oops...",
-        text: "Enter Vaild Email or Password",
+        text: err.message,
         // footer: '<a href="#">Why do I have this issue?</a>'
       });
     }
@@ -56,7 +56,7 @@ export const Register: React.FC<LoginProps> = ({
     >
       <div className=" w-1/3  sm:w-[400px]">
         {/* <!-- component --> */}
-        <div className="bg-[#002f34] my-10  text-white flex h-[600px]  rounded-xl flex-col items-center sm:justify-center sm:pt-0">
+        <div className="bg-[#002f34] my-5  text-white flex h-[600px]  rounded-xl flex-col items-center sm:justify-center sm:pt-0">
           <div className="flex items-center justify-center mr-4 w-3 h-3 place-self-end">
             <button
               onClick={onClose}
@@ -114,7 +114,6 @@ export const Register: React.FC<LoginProps> = ({
                         <input
                           onChange={(e) => setName(e.target.value)}
                           type="text"
-                          name="useremail"
                           placeholder="username"
                           className="block w-full border-0 bg-transparent p-0 text-sm file:my-1 file:rounded-full file:border-0 file:bg-accent file:px-4 file:py-2 file:font-medium placeholder:text-muted-foreground/90 focus:outline-none focus:ring-0 sm:leading-7 text-foreground"
                         />
@@ -130,7 +129,7 @@ export const Register: React.FC<LoginProps> = ({
                         </div>
                         <input
                           onChange={(e) => setEmail(e.target.value)}
-                          type="text"
+                          type="email"
                           name="useremail"
                           placeholder="useremail"
                           className="block w-full border-0 bg-transparent p-0 text-sm file:my-1 file:rounded-full file:border-0 file:bg-accent file:px-4 file:py-2 file:font-medium placeholder:text-muted-foreground/90 focus:outline-none focus:ring-0 sm:leading-7 text-foreground"
@@ -177,7 +176,7 @@ export const Register: React.FC<LoginProps> = ({
                   <div className="mt-2 flex items-center justify-end ">
                     <button
                       onClick={regisBtn}
-                      className="my-3 font-semibold hover:bg-black hover:text-white hover:ring hover:ring-white transition duration-300 inline-flex items-center justify-center rounded-md text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-white text-black h-10 px-4 py-2"
+                      className=" font-semibold hover:bg-black hover:text-white hover:ring hover:ring-white transition duration-300 inline-flex items-center justify-center rounded-md text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-white text-black h-10 px-4 py-2"
                       type="submit"
                     >
                       Register
@@ -185,7 +184,7 @@ export const Register: React.FC<LoginProps> = ({
                   </div>
                   <div className="flex justify-center items-center mt-2 text-sm font-normal text-foreground">
                     Already have an Account?{" "}
-                    <button className="text-base font-medium text-foreground underline">
+                    <button onClick={()=>loginIsVisible} className="text-base font-medium text-foreground underline">
                       {" "}
                       Login
                     </button>

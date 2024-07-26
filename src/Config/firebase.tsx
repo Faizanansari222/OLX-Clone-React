@@ -4,9 +4,14 @@ import {
   getAuth,
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
-  onAuthStateChanged ,
+  onAuthStateChanged,
 } from "firebase/auth";
-import { getFirestore, collection, addDoc, getDoc, doc } from "firebase/firestore";
+import {
+  getFirestore,
+  collection,
+  addDoc,
+  getDocs,
+} from "firebase/firestore";
 import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
 
 // import { getAnalytics } from "firebase/analytics";
@@ -29,41 +34,35 @@ export const loginFun = (email: any, password: any) => {
   return signInWithEmailAndPassword(auth, email, password);
 };
 
-
-export const regisFun = async (email: string, name: string, password: string) => {
+export const regisFun = async (
+  email: string,
+  name: string,
+  password: string
+) => {
   await createUserWithEmailAndPassword(auth, email, password);
-  
-    return addDoc(collection(db, "users"), { email, name });
+
+  return addDoc(collection(db, "users"), { email, name });
 };
 
 export const addProduct = async (productInfo: any) => {
-const { title, price, provence, date, description, image} = productInfo;
+  const { title, price, provence, date, description, image } = productInfo;
 
-  const storageRef = ref(storage, 'ProductInfo/' + image.name);
+  const storageRef = ref(storage, "ProductInfo/" + image.name);
 
   await uploadBytes(storageRef, image);
 
   const url = await getDownloadURL(storageRef);
 
-  await addDoc(collection(db, "ProductInfo"), {
-    title,
-    price,
-    provence,
-    date,
-    description,
-    image: url
-
-  });
-  const docRef = doc(db, "ProductInfo");
-const docSnap = await getDoc(docRef);
-// console.log("Document data:", docSnap.data());
+  return addDoc(collection(db, "ProductInfo/"), {title, price, provence, date, description, image: url});
+};
 
 
-if (docSnap.exists()) {
-  console.log("Document data:", docSnap.data());
-} else {
-  // docSnap.data() will be undefined in this case
-  console.log("No such document!");
-}
-
+export const Getdata = async (nodename: any) => {
+  const docRef = collection(db, "ProductInfo");
+  const docSnap = await getDocs(docRef);
+  const data = docSnap.docs.map((doc: any) => ({
+    id: doc.id,
+    ...doc.data(),
+  }));
+  return data;
 };

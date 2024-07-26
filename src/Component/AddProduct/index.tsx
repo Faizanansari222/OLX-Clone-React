@@ -1,23 +1,42 @@
 import React, { useState } from "react";
 import { addProduct } from "../../Config/firebase";
 import Footer from "../Footer";
+import Swal from "sweetalert2";
 
 function AddProduct() {
   const [title, setTitle] = useState("");
   const [price, setPrice] = useState("");
-  const [provence, setProvence] = useState("");
+  const [province, setProvince] = useState("");
   const [date, setDate] = useState("");
   const [description, setDescription] = useState("");
   const [image, setImage] = useState(null);
 
-  const handleSubmit = async (e: any) => {
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
     try {
-      e.preventDefault();
-      // Handle form submission logic here
-     await addProduct( {title, price, provence, date, description, image} );
-      console.log("Form submitted successfully!");
-    } catch (err) {
-      console.log(err);
+      if (!title || !price || !province || !date || !description || !image) {
+        alert("Please fill all the fields");
+        return;
+      }
+      await addProduct({ title, price, province, date, description, image });
+      setTitle("");
+      setPrice("");
+      setProvince("");
+      setDate("");
+      setDescription("");
+      setImage(null);
+      Swal.fire({
+        icon: "success",
+        title: "You have successfully submitted the form",
+        showConfirmButton: false,
+      });
+      console.log("Form submitted");
+    } catch (err: any) {
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: err.message,
+      });
     }
   };
 
@@ -29,8 +48,8 @@ function AddProduct() {
             POST YOUR AD
           </h1>
         </div>
-        <form>
-          <div className=" gap-6 mt-4 sm:grid-cols-2">
+        <form onSubmit={handleSubmit}>
+          <div className="gap-6 mt-4 sm:grid-cols-2">
             <div>
               <label className="text-white dark:text-gray-200">Title:</label>
               <input
@@ -49,23 +68,19 @@ function AddProduct() {
                   type="number"
                   className="block w-full mt-2 py-1 text-gray-700 bg-white focus:outline-none border-gray-300 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500"
                 />
-                <span className="font-semibold text-gray-500 text-xl">
-                  /Rs.
-                </span>
+                <span className="font-semibold text-gray-500 text-xl">/Rs.</span>
               </div>
             </div>
             <div>
-              <label className="text-white dark:text-gray-200">
-                Select Provence:
-              </label>
+              <label className="text-white dark:text-gray-200">Select Province:</label>
               <select
-                value={provence}
-                onChange={(e) => setProvence(e.target.value)}
+                value={province}
+                onChange={(e) => setProvince(e.target.value)}
                 className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none"
               >
-                <option value="">Select Provence</option>
+                <option value="">Select Province</option>
                 <option value="Sindh">Sindh</option>
-                <option value="Blochistan">Blochistan</option>
+                <option value="Balochistan">Balochistan</option>
                 <option value="Punjab">Punjab</option>
                 <option value="Khyber Pakhtunkhwa">Khyber Pakhtunkhwa</option>
               </select>
@@ -80,19 +95,15 @@ function AddProduct() {
               />
             </div>
             <div>
-              <label className="text-white dark:text-gray-200">
-                Description:
-              </label>
+              <label className="text-white dark:text-gray-200">Description:</label>
               <textarea
                 value={description}
-                onChange={(e: any) => setDescription(e.target.value)}
+                onChange={(e) => setDescription(e.target.value)}
                 className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none"
               ></textarea>
             </div>
             <div>
-              <label className="block text-sm font-medium text-white">
-                Image:
-              </label>
+              <label className="block text-sm font-medium text-white">Image:</label>
               <div className="mt-1 flex justify-center px-6 pt-5 pb-6 border-2 border-gray-300 border-dashed rounded-md">
                 <div className="space-y-1 text-center">
                   <svg
@@ -113,7 +124,7 @@ function AddProduct() {
                     <label className="relative cursor-pointer bg-white rounded-md font-medium text-indigo-600 hover:text-indigo-500 focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-indigo-500">
                       <span>Upload a file</span>
                       <input
-                        onChange={(e: any) => setImage(e.target.files[0])}
+                        onChange={(e:any) => setImage(e.target.files[0])}
                         type="file"
                         className="sr-only"
                       />
@@ -127,7 +138,7 @@ function AddProduct() {
           </div>
           <div className="flex justify-end mt-6">
             <button
-              onClick={handleSubmit}
+              type="submit"
               className="px-6 py-2 leading-5 text-white transition-colors duration-200 transform bg-pink-500 rounded-md hover:bg-pink-700 focus:outline-none focus:bg-gray-600"
             >
               Save
@@ -135,7 +146,7 @@ function AddProduct() {
           </div>
         </form>
       </section>
-      <Footer/>
+      <Footer />
     </div>
   );
 }

@@ -6,20 +6,26 @@ import { useNavigate } from "react-router-dom";
 import Footer from "../../Component/Footer";
 import { Register } from "../../Component/Register";
 import LoginSecond from "../../Component/LoginSecond";
-
+import { Getdata } from "../../Config/firebase"
 function Dashboard() {
-  const [heartActive, setHeartActive] = useState({});
-  const [products, setProducts] = useState([]);
+  const [heartActive, setHeartActive] = useState<any>({});
+  const [products, setProducts] = useState<any>([]);
   const [showLogin, setShowLogin] = useState(false);
   const [showRegis, setShowRegis] = useState(false);
   const navigate = useNavigate();
 
+
+
   useEffect(() => {
-    fetch('https://fakestoreapi.com/products')
-      .then(res => res.json())
-      .then(data => setProducts(data))
+    // fireStoreData()
+     Getdata("ProductInfo").then((data:any) =>{
+      setProducts(data)
+      console.log(data);
+      
+    
+    })
       .catch(error => console.error('Error fetching products:', error));
-  }, []);
+  }, [products]);
 
   const handleHeartClick = (id:any) => {
     setHeartActive((prev:any) => ({
@@ -48,7 +54,7 @@ function Dashboard() {
         <Header />
         <Category />
         <div className="grid grid-cols-4 gap-5">
-          {products.length > 0 ? products.map((item) => {
+          {products.length > 0 ? products.map((item:any) => {
             const { id, price, title, description, image } = item;
             return (
               <div

@@ -13,24 +13,29 @@ function AddProduct() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    console.log(title, price, province, date, description, image);
+
+    if (!title || !price || !province || !date || !description || !image) {
+      Swal.fire("Validation Error", "All fields are required.", "warning");
+      return;
+    }
     try {
-      if (!title || !price || !province || !date || !description || !image) {
-        alert("Please fill all the fields");
-        return;
-      }
-      await addProduct({ title, price, province, date, description, image });
-      setTitle("");
-      setPrice("");
-      setProvince("");
-      setDate("");
-      setDescription("");
-      setImage(null);
+      await addProduct({ title, price, date, description, image });
+
       Swal.fire({
         icon: "success",
         title: "You have successfully submitted the form",
         showConfirmButton: false,
       });
       console.log("Form submitted");
+      setTitle("");
+      setPrice("");
+      setProvince("");
+      setDate("");
+      setDescription("");
+      setImage(null);
+
+      
     } catch (err: any) {
       Swal.fire({
         icon: "error",
@@ -68,11 +73,15 @@ function AddProduct() {
                   type="number"
                   className="block w-full mt-2 py-1 text-gray-700 bg-white focus:outline-none border-gray-300 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500"
                 />
-                <span className="font-semibold text-gray-500 text-xl">/Rs.</span>
+                <span className="font-semibold text-gray-500 text-xl">
+                  /Rs.
+                </span>
               </div>
             </div>
             <div>
-              <label className="text-white dark:text-gray-200">Select Province:</label>
+              <label className="text-white dark:text-gray-200">
+                Select Province:
+              </label>
               <select
                 value={province}
                 onChange={(e) => setProvince(e.target.value)}
@@ -95,7 +104,9 @@ function AddProduct() {
               />
             </div>
             <div>
-              <label className="text-white dark:text-gray-200">Description:</label>
+              <label className="text-white dark:text-gray-200">
+                Description:
+              </label>
               <textarea
                 value={description}
                 onChange={(e) => setDescription(e.target.value)}
@@ -103,7 +114,9 @@ function AddProduct() {
               ></textarea>
             </div>
             <div>
-              <label className="block text-sm font-medium text-white">Image:</label>
+              <label className="block text-sm font-medium text-white">
+                Image:
+              </label>
               <div className="mt-1 flex justify-center px-6 pt-5 pb-6 border-2 border-gray-300 border-dashed rounded-md">
                 <div className="space-y-1 text-center">
                   <svg
@@ -124,7 +137,7 @@ function AddProduct() {
                     <label className="relative cursor-pointer bg-white rounded-md font-medium text-indigo-600 hover:text-indigo-500 focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-indigo-500">
                       <span>Upload a file</span>
                       <input
-                        onChange={(e:any) => setImage(e.target.files[0])}
+                        onChange={(e: any) => setImage(e.target.files[0])}
                         type="file"
                         className="sr-only"
                       />

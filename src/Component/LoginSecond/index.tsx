@@ -4,7 +4,6 @@ import GoogleBtn from "./image/Google.png";
 import FBBtn from "./image/Facebook.png";
 import { loginFun } from "../../Config/firebase";
 import Swal from "sweetalert2";
-import { useNavigate } from "react-router-dom";
 // import { useNavigate } from "react-router-dom";
 
 function LoginSecond({
@@ -18,9 +17,6 @@ function LoginSecond({
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-
-  const navigate =useNavigate()
-
   if (!isVisible) return null;
   // const navigate = useNavigate();
 
@@ -29,19 +25,20 @@ function LoginSecond({
       e.preventDefault();
       await loginFun(email, password);
 
+      console.log("Login Successful");
       Swal.fire({
-        icon: "success",
-        title: "You are Succsessfully Login",
-        showConfirmButton: false,
-      });
-
-      navigate("/");
-    } catch (err: any) {
+          icon: "success",
+          title: "You are Succsessfully Login",
+          showConfirmButton: false,
+        });
+        
+      
+      } catch (err: any) {
+      
       Swal.fire({
         icon: "error",
         title: "Oops...",
         text: err.message,
-        // footer: '<a href="#">Why do I have this issue?</a>'
       });
     }
   };

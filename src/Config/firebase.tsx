@@ -45,24 +45,30 @@ export const regisFun = async (
 };
 
 export const addProduct = async (productInfo: any) => {
-  const { title, price, provence, date, description, image } = productInfo;
+  const { title, price, date, description, image } = productInfo;
 
-  const storageRef = ref(storage, "ProductInfo/" + image.name);
+  const storageRef = ref(storage, "images/" + image.name);
 
   await uploadBytes(storageRef, image);
 
   const url = await getDownloadURL(storageRef);
 
-  return addDoc(collection(db, "ProductInfo/"), {title, price, provence, date, description, image: url});
+  return addDoc(collection(db, "ProductDetail"), {title, price, date, description, image: url});
+
+  // console.log(title,price, provence, date, description, image: url );
+  
 };
 
 
-export const Getdata = async (nodename: any) => {
-  const docRef = collection(db, "ProductInfo");
-  const docSnap = await getDocs(docRef);
-  const data = docSnap.docs.map((doc: any) => ({
-    id: doc.id,
-    ...doc.data(),
-  }));
-  return data;
+export const getData = async (nodename: any) => {
+const products:any = [];
+  const querySnapshot = await getDocs(collection(db, 'ProductDetail'));
+
+  querySnapshot.forEach((doc) => {
+    products.push({ id: doc.id, ...doc.data() });
+  });
+
+  return products;
 };
+
+export {onAuthStateChanged, auth}

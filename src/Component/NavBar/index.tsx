@@ -1,14 +1,31 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import logo from "./Image/OLX-Symbol.png";
 import { useNavigate } from "react-router-dom";
+import { onAuthStateChanged, auth } from "../../Config/firebase";
+import DropDown from "../../views/DropDown";
 
-export default function NavBar(props:any) {
+export default function NavBar(props: any) {
   const { onClick } = props;
-const navigate = useNavigate()
+  const [user, setUser] = useState<any>();
+  const [profileOpen, setProfileOpen] = useState(false);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        setUser(user);
+      }
+    });
+  }, []);
 
   return (
     <>
       <div>
+        {
+          profileOpen && <DropDown closeFun={() => setProfileOpen(false)}/>
+        }
+      
+      
         <div className="fixed pt-5 pb-5 top-0 z-10 mb-10 bg-white border-b w-full ">
           <div className="flex gap-8 items-center mb-5">
             <div className="">
@@ -144,18 +161,62 @@ const navigate = useNavigate()
               </div>
             </div>
             <div className="flex items-center  gap-3">
-              <span className="hover:border-b-white  border-b-2  border-[#002f34]">
-                <button onClick={onClick} className=" font-bold  text-[#002f34] hover:border-none">
-                  Login
-                </button>
-              </span>
+              <div>
+                {user ? (
+                  <div className=" gap-3 flex items-center justify-between">
+                    <div className="p-1 hover:bg-blue-100 rounded-full">
+                    <svg className="text-3xl  " xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 256 256"><path fill="currentColor" d="M221.8 175.94c-5.55-9.56-13.8-36.61-13.8-71.94a80 80 0 1 0-160 0c0 35.34-8.26 62.38-13.81 71.94A16 16 0 0 0 48 200h40.81a40 40 0 0 0 78.38 0H208a16 16 0 0 0 13.8-24.06M128 216a24 24 0 0 1-22.62-16h45.24A24 24 0 0 1 128 216m-80-32c7.7-13.24 16-43.92 16-80a64 64 0 1 1 128 0c0 36.05 8.28 66.73 16 80Z"/></svg>
+                    </div>
+                    <div className="p-1 hover:bg-blue-100 rounded-full">
+                      <svg
+                        className="text-3xl"
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="1em"
+                        height="1em"
+                        viewBox="0 0 24 24"
+                      >
+                        <path
+                          fill="none"
+                          stroke="currentColor"
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          stroke-width="1.5"
+                          d="M21.25 12a9.226 9.226 0 0 1-2.705 6.54A9.251 9.251 0 0 1 12 21.25a9.189 9.189 0 0 1-3.795-.81l-3.867.572a1.195 1.195 0 0 1-1.361-1.43l.537-3.923A8.943 8.943 0 0 1 2.75 12a9.228 9.228 0 0 1 2.705-6.54A9.25 9.25 0 0 1 12 2.75a9.26 9.26 0 0 1 6.545 2.71A9.236 9.236 0 0 1 21.25 12"
+                        />
+                      </svg>
+                    </div>
+                    <div onClick={()=>{setProfileOpen(!profileOpen)}} className="flex items-center">
+                    <img
+                      className="w-10 rounded-full"
+                      src="https://www.olx.com.pk/assets/iconProfilePicture.7975761176487dc62e25536d9a36a61d.png"
+                      alt=""
+                    />
+                    <svg xmlns="http://www.w3.org/2000/svg" className="text-4xl w-16" width="1em" height="1em" viewBox="0 0 24 24"><path fill="currentColor" d="m12 15l-4.243-4.242l1.415-1.414L12 12.172l2.828-2.828l1.415 1.414z"/></svg>
+                    </div>
+                  </div>
+                ) : (
+                  <span className="hover:border-b-white  border-b-2  border-[#002f34]">
+                    <button
+                      onClick={onClick}
+                      className=" font-bold  text-[#002f34] hover:border-none"
+                    >
+                      Login
+                    </button>
+                  </span>
+                )}
+              </div>
               <div className="flex justify-center items-center">
                 <img
                   className="z-10 w-32 relative "
                   src="https://www.olx.com.pk/assets/iconSellBorder_noinline.d9eebe038fbfae9f90fd61d971037e02.svg"
                   alt=""
                 />
-                <button onClick={()=>{navigate('/addproduct')}} className="z-30 absolute gap-1 p-2  flex items-center font-bold text-base text-[#002f34]">
+                <button
+                  onClick={() => {
+                    navigate("/addproduct");
+                  }}
+                  className="z-30 absolute gap-1 p-2  flex items-center font-bold text-base text-[#002f34]"
+                >
                   <svg
                     className="font-bold "
                     xmlns="http://www.w3.org/2000/svg"

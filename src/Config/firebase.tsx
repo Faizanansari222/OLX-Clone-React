@@ -11,6 +11,8 @@ import {
   collection,
   addDoc,
   getDocs,
+  getDoc,
+  doc,
 } from "firebase/firestore";
 import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
 
@@ -53,22 +55,47 @@ export const addProduct = async (productInfo: any) => {
 
   const url = await getDownloadURL(storageRef);
 
-  return addDoc(collection(db, "ProductDetail"), {title, price, date, description, image: url});
+  return addDoc(collection(db, "ProductDetail"), {
+    title,
+    price,
+    date,
+    description,
+    image: url,
+  });
 
   // console.log(title,price, provence, date, description, image: url );
-  
 };
 
-
-export const getData = async (nodename: any) => {
-const products:any = [];
-  const querySnapshot = await getDocs(collection(db, 'ProductDetail'));
+export const getData = async () => {
+  const querySnapshot = await getDocs(collection(db, "ProductDetail"));
+  const products: any = [];
 
   querySnapshot.forEach((doc) => {
-    products.push({ id: doc.id, ...doc.data() });
+    const data = doc.data();
+    data.id = doc.id;
+    products.push(data);
   });
 
   return products;
 };
 
-export {onAuthStateChanged, auth}
+export const getSingleProduct = async (id: any) => {
+  const docRef = doc(db, "ProductDetail", id);
+  const docSnap = await getDoc(docRef);
+  const data= []
+
+  if (docSnap.exists()) {
+    // console.log("Document data:", docSnap.data());
+    const product = docSnap.data();
+    data.push(product)
+  } else {
+    // docSnap.data() will be undefined in this case
+    console.log("No such document!");
+  }
+  // console.log(data);
+  
+  return data
+  
+};
+
+export { onAuthStateChanged, auth };

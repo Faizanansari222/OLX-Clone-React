@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import NavBar from "../../Component/NavBar";
 import Footer from "../../Component/Footer";
+import { getSingleProduct } from "../../Config/firebase";
 
 interface Product {
   id: number;
@@ -18,18 +19,44 @@ interface Product {
 
 export default function Detail() {
   const { id } = useParams<{ id: string }>();
-  const [product, setProduct] = useState<Product | null>(null);
+  const [singleProduct, setSingleProduct] = useState<any>();
 
   // const navigate = useNavigate();
 
   useEffect(() => {
-    fetch(`https://fakestoreapi.com/products/${id}`)
-      .then((res) => res.json())
-      .then((json) => setProduct(json))
-      .catch((err) => console.error("Error fetching product:", err));
+
+
+    getSingleProduct(id).then((data) => {
+
+      setSingleProduct(data)
+    })
+
+
+
+
+
+
+
+
+
+
+    // const fetchSingleProduct = async () => {
+    //   try {
+    //     const productData = await getSingleProduct(id);
+    //     setSingleProduct(productData);
+        
+    //   } catch (error) {
+    //     console.error("Error fetching product: ", error);
+    //   }
+    // };
+    
+    // fetchSingleProduct();
+    // if (id) {
+    // }
   }, [id]);
 
-  if (!product) {
+  
+  if (!singleProduct) {
     return (
       <div className="flex justify-center items-center h-screen">
         <div className="flex flex-row gap-4">
@@ -44,9 +71,9 @@ export default function Detail() {
       </div>
     );
   }
-
-  const { title, description, price, image } = product;
-
+  
+  const { title, description, price, image } = singleProduct[0];
+  
   return (
     <>
       <div className="p-5 mb-28 ">
@@ -57,7 +84,7 @@ export default function Detail() {
               {image && <img className="" src={image} alt={title} />}
             </div>
             <div className="text-[#002f34] py-3 mb-5 w-[800px] px-3 rounded-sm border">
-              <p className="text-4xl mb-3 font-extrabold">${price}</p>
+              <p className="text-4xl mb-3 font-extrabold">Rs.{price}</p>
               <h1 className="text-2xl font-bold">{title}</h1>
               <div className="flex items-center justify-between">
                 <h1 className="flex justify-start items-end text-lg text-gray-700  ">

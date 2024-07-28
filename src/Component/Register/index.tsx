@@ -17,6 +17,7 @@ export const Register: React.FC<LoginProps> = ({
   isVisible,
   onClose,
   loginIsVisible,
+  
 }) => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -31,13 +32,15 @@ export const Register: React.FC<LoginProps> = ({
     try {
       await regisFun(email, name, password );
       // const user = userCredential.user;
-      Swal.fire({
+      await Swal.fire({
         // position: "center",
         icon: "success",
         title: "You are Succsessfully Registered",
         showConfirmButton: false,
         timer: 1000,
       });
+
+      
     } catch (err: any) {
       Swal.fire({
         icon: "error",

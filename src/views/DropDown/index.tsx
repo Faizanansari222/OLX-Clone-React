@@ -4,7 +4,7 @@ import { auth } from "../../Config/firebase";
 
 function DropDown(closeFun:any) {
   return (
-    <div className="absolute top-32 rounded-md bg-white shadow right-20 z-50  ">
+    <div className="fixed top-32 rounded-md  bg-gray-50 shadow-md right-20 z-50  ">
       <ul className="">
         <li className="hover:bg-blue-200 rounded-t-md w-full">
           <button className="mb-1 px-4 p-2 flex items-center gap-2 ">
@@ -42,10 +42,10 @@ function DropDown(closeFun:any) {
           <button
             onClick={() => {
               signOut(auth)
-                .then(() => {
-                  // Sign-out successful.
+              .then(() => {
                   closeFun()
-
+                  // Sign-out successful.
+                  
                   console.log("Sign out successful");
                 })
                 .catch((error) => {

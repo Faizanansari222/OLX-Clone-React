@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 import Footer from "../../Component/Footer";
 import { Register } from "../../Component/Register";
 import LoginSecond from "../../Component/LoginSecond";
-import { getData } from "../../Config/firebase";
+import {getData}  from "../../Config/firebase";
 function Dashboard() {
   const [heartActive, setHeartActive] = useState<any>({});
   const [fireStoreProducts, setFireStoreProducts] = useState<any>([]);
@@ -14,21 +14,20 @@ function Dashboard() {
   const [showRegis, setShowRegis] = useState(false);
   const navigate = useNavigate();
 
-  const getfirebasedata = async () => {
-    await getData("products")
-      .then((res) => {
-        setFireStoreProducts([...res]);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  };
   useEffect(() => {
-    getfirebasedata();
-    fetch('https://fakestoreapi.com/products/')
-            .then(res=>res.json())
-            .then(json=>setFireStoreProducts(json))
+    const fetchData = async () => {
+      try {
+        const product = await getData();
+        setFireStoreProducts(product);
+      
+      } catch (error) {
+        console.error("Error fetching data: ", error);
+      }
+    };
+
+    fetchData();
   }, []);
+
 
   const handleHeartClick = (id: any) => {
     setHeartActive((prev: any) => ({
@@ -56,7 +55,7 @@ function Dashboard() {
         <NavBar onClick={() => setShowLogin(true)} />
         <Header />
         <Category />
-        <div className="grid grid-cols-4 gap-5">
+        <div className="grid grid-cols-4 w-full gap-5">
           {fireStoreProducts.length > 0 ? (
             fireStoreProducts.map((item: any) => {
               const { id, price, title, description, image } = item;
@@ -66,7 +65,7 @@ function Dashboard() {
                   onClick={() => navigate(`/detail/${id}`)}
                   className="h-70 overflow-y-hidden"
                 >
-                  <div className="border h-full m-auto shadow-lg container rounded">
+                  <div className="border  h-full m-auto shadow-lg container rounded">
                     <img
                       src="https://loading.io/assets/mod/spinner/bar-chart/index.svg"
                       alt=""
@@ -133,7 +132,12 @@ function Dashboard() {
               );
             })
           ) : (
-            <p>Loading products...</p>
+            <div className='flex absolute inset-0 justify-center items-center z-50 h-screen  space-x-2 backdrop-blur-md  dark:invert'>
+            <span className='sr-only'>Loading...</span>
+             <div className='h-8 w-8 bg-white rounded-full animate-bounce [animation-delay:-0.3s]'></div>
+           <div className='h-8 w-8 bg-white rounded-full animate-bounce [animation-delay:-0.15s]'></div>
+           <div className='h-8 w-8 bg-white rounded-full animate-bounce'></div>
+         </div>
           )}
         </div>
       </div>

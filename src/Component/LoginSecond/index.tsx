@@ -26,6 +26,7 @@ function LoginSecond({
       await loginFun(email, password);
 
       console.log("Login Successful");
+      onClose()
       Swal.fire({
           icon: "success",
           title: "You are Succsessfully Login",

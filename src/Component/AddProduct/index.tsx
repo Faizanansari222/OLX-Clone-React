@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { addProduct } from "../../Config/firebase";
 import Footer from "../Footer";
 import Swal from "sweetalert2";
+import { useNavigate } from "react-router-dom";
 
 function AddProduct() {
   const [title, setTitle] = useState("");
@@ -10,6 +11,8 @@ function AddProduct() {
   const [date, setDate] = useState("");
   const [description, setDescription] = useState("");
   const [image, setImage] = useState(null);
+
+  const navigate = useNavigate();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -22,11 +25,13 @@ function AddProduct() {
     try {
       await addProduct({ title, price, date, description, image });
 
-      Swal.fire({
+      await Swal.fire({
         icon: "success",
         title: "You have successfully submitted the form",
         showConfirmButton: false,
+        // button: 
       });
+      navigate("/")
       console.log("Form submitted");
       setTitle("");
       setPrice("");
@@ -34,7 +39,6 @@ function AddProduct() {
       setDate("");
       setDescription("");
       setImage(null);
-
       
     } catch (err: any) {
       Swal.fire({

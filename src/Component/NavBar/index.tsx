@@ -16,7 +16,7 @@ export default function NavBar(props: any) {
         setUser(user);
       }
     });
-  }, []);
+  }, [user]);
 
   return (
     <>

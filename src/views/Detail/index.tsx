@@ -19,14 +19,14 @@ interface Product {
 
 export default function Detail() {
   const { id } = useParams<{ id: string }>();
-  const [singleProduct, setSingleProduct] = useState<any>();
+  const [singleProduct, setSingleProduct] = useState<any>({});
 
   // const navigate = useNavigate();
 
   useEffect(() => {
 
 
-    getSingleProduct(id).then((data) => {
+    getSingleProduct(id).then((data:any) => {
 
       setSingleProduct(data)
     })
@@ -53,7 +53,7 @@ export default function Detail() {
     // fetchSingleProduct();
     // if (id) {
     // }
-  }, [id]);
+  }, []);
 
   
   if (!singleProduct) {
@@ -72,7 +72,7 @@ export default function Detail() {
     );
   }
   
-  const { title, description, price, image } = singleProduct[0];
+  const { title, description, price, image } = singleProduct;
   
   return (
     <>

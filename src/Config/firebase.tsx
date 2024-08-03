@@ -82,19 +82,19 @@ export const getData = async () => {
 export const getSingleProduct = async (id: any) => {
   const docRef = doc(db, "ProductDetail", id);
   const docSnap = await getDoc(docRef);
-  const data= []
+  // const data= []
 
   if (docSnap.exists()) {
     // console.log("Document data:", docSnap.data());
     const product = docSnap.data();
-    data.push(product)
+    // data.push(product)
+    return docSnap.data()
   } else {
     // docSnap.data() will be undefined in this case
     console.log("No such document!");
   }
   // console.log(data);
-  
-  return data
+
   
 };
 

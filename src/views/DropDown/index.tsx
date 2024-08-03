@@ -1,8 +1,37 @@
 import { signOut } from "firebase/auth";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { auth } from "../../Config/firebase";
 
 function DropDown(closeFun:any) {
+
+const [user,setUser] = useState<any>();
+
+const fetchUser = () => {
+  signOut(auth)
+  .then(() => {
+
+
+      closeFun()
+      // Sign-out successful.
+      
+      console.log("Sign out successful");
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+}
+
+
+  useEffect(() => {
+   
+    fetchUser()
+
+
+  }, [user]);
+
+
+
+
   return (
     <div className="fixed top-32 rounded-md  bg-gray-50 shadow-md right-20 z-50  ">
       <ul className="">
@@ -40,18 +69,8 @@ function DropDown(closeFun:any) {
         </li>
         <li className="hover:bg-blue-200 w-full rounded-b-md">
           <button
-            onClick={() => {
-              signOut(auth)
-              .then(() => {
-                  closeFun()
-                  // Sign-out successful.
-                  
-                  console.log("Sign out successful");
-                })
-                .catch((error) => {
-                  console.log(error);
-                });
-            }}
+
+            // onClick={}
             className=" px-4 p-2 flex items-center gap-2"
           >
             <svg

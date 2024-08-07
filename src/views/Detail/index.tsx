@@ -137,8 +137,8 @@ export default function Detail() {
                   Show Phone Number
                 </button>
               </div>
-              <button className=" border-2 text-[#002f34] text-bold border-[#002f34] p-2 rounded-sm w-full ">
-                Chat
+              <button  className=" border-2 text-[#002f34] text-bold border-[#002f34] p-2 rounded-sm w-full ">
+                Add to Cart
               </button>
             </div>
           </div>

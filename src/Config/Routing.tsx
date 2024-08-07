@@ -5,8 +5,12 @@ import {
   import Dashboard from "../views/Dashboard";
 import Detail from "../views/Detail";
 import AddProduct from "../Component/AddProduct";
+import NavBar from "../Component/NavBar";
 
   const router = createBrowserRouter([
+    
+    
+    
     {
       path: "/",
       element: <Dashboard />,

@@ -52,7 +52,7 @@ function LoginSecond({
       id="wrapper"
       className="fixed inset-0 z-50 bg-black bg-opacity-15 cursor-all-scroll backdrop-blur-sm shadow-sm flex justify-center items-center"
     >
-      <div className=" w-1/3 sm:w-[400px]">
+      <div className=" ">
         {/* <!-- component --> */}
         <div className="bg-[#002f34] text-white flex h-[600px]  rounded-xl flex-col items-center sm:justify-center sm:pt-0">
           <div className="flex items-center justify-center mr-4 w-3 h-3 place-self-end">

@@ -15,8 +15,8 @@ function Dashboard() {
   const [fireStoreProducts, setFireStoreProducts] = useState<any>([]);
   const [showLogin, setShowLogin] = useState(false);
   const [showRegis, setShowRegis] = useState(false);
-  const [showAddToCart, setShowAddToCart] = useState(true);
-  const navigate = useNavigate();
+  const [showAddToCart, setShowAddToCart] = useState(false);
+  // const navigate = useNavigate();
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -44,7 +44,7 @@ function Dashboard() {
 
   return (
     <>
-    <AddToCart isVisible={showAddToCart} addToCartClose={() => setShowAddToCart(true)}/>
+    <AddToCart isVisible={showAddToCart} addToCartClose={() => setShowAddToCart(false)}/>
     {/* <AddToCart isVisible={showAddToCart} onClose={() => setShowAddToCart(false)}/> */}
       <LoginSecond
         isVisible={showLogin}
@@ -68,6 +68,7 @@ function Dashboard() {
             fireStoreProducts.map((item: any) => {
               const { id, price, title, description, image } = item;
               return (
+                <>
                 <div
                   key={id}
                   // onClick={() => navigate(`/detail/${id}`)}
@@ -159,7 +160,7 @@ function Dashboard() {
                     </div>
                   </div>
                 </div>
-              );
+                </>);
             })
           ) : (
             <div className="flex absolute inset-0 justify-center items-center z-50 h-screen  space-x-2 backdrop-blur-md  dark:invert">

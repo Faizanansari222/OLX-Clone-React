@@ -14,9 +14,9 @@ export const cartSlice = createSlice({
   initialState,
   reducers: {
     addToCart: (state:any, data:any) => {
-     state.cart.push(data)
+     state.cart.push(data.payload)
+    //  console.log(state.cart);
      
-     console.log(state.cart);
     },
     
   },

@@ -9,13 +9,16 @@ import LoginSecond from "../../Component/LoginSecond";
 import { getData } from "../../Config/firebase";
 import { addToCart } from "../../Store/cartSlice";
 import { useDispatch } from "react-redux";
+import AddToCart from "../../Component/AddToCart";
 function Dashboard() {
   const [heartActive, setHeartActive] = useState<any>({});
   const [fireStoreProducts, setFireStoreProducts] = useState<any>([]);
   const [showLogin, setShowLogin] = useState(false);
   const [showRegis, setShowRegis] = useState(false);
+  const [showAddToCart, setShowAddToCart] = useState(true);
   const navigate = useNavigate();
-const dispatch = useDispatch();
+  const dispatch = useDispatch();
+
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -29,6 +32,9 @@ const dispatch = useDispatch();
     fetchData();
   }, []);
 
+
+
+
   const handleHeartClick = (id: any) => {
     setHeartActive((prev: any) => ({
       ...prev,
@@ -38,6 +44,8 @@ const dispatch = useDispatch();
 
   return (
     <>
+    <AddToCart isVisible={showAddToCart} addToCartClose={() => setShowAddToCart(true)}/>
+    {/* <AddToCart isVisible={showAddToCart} onClose={() => setShowAddToCart(false)}/> */}
       <LoginSecond
         isVisible={showLogin}
         loginClose={() => setShowLogin(false)}
@@ -52,7 +60,7 @@ const dispatch = useDispatch();
       />
 
       <div className="p-5">
-        <NavBar onClick={() => setShowLogin(true)} />
+        <NavBar onClick={() => setShowLogin(true)} onAddToCart={() => setShowAddToCart(true)} />
         <Header />
         <Category />
         <div className="grid grid-cols-4 w-full gap-5">
@@ -116,7 +124,10 @@ const dispatch = useDispatch();
                             )}
                           </button>
                           <div>
-                            <button onClick={()=> dispatch(addToCart(item))} className="text-2xl">
+                            <button
+                              onClick={() => dispatch(addToCart(item))}
+                              className="text-2xl"
+                            >
                               {" "}
                               <svg
                                 xmlns="http://www.w3.org/2000/svg"

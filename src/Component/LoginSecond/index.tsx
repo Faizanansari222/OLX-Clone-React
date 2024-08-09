@@ -70,17 +70,17 @@ function LoginSecond({
               Login into your <span className="font-bold">OLX</span> account
             </h1>
           </div>
-          <div className="flex items-center px-5 mt-2 h-12 w-full gap-3">
+          <div className="flex items-center justify-center px-5 mt-2  w-full gap-3">
             <a>
               <img
-                className="cursor-pointer hover:border-2 hover:border-white rounded-md"
+                className="cursor-pointer hover:border-2 w-40 hover:border-white rounded-md"
                 src={GoogleBtn}
                 alt=""
               />
             </a>
             <a>
               <img
-                className="cursor-pointer hover:border-2 hover:border-white rounded-md"
+                className="cursor-pointer hover:border-2 w-40 hover:border-white rounded-md"
                 src={FBBtn}
                 alt=""
               />

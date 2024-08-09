@@ -1,8 +1,10 @@
 import React from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { removeCart } from "../../Store/cartSlice";
 
 function AddToCart({ isVisible, addToCartClose }: any) {
   const cart = useSelector((state: any) => state.cart);
+  const dispatch = useDispatch();
 
   if (!isVisible) return null;
 
@@ -13,29 +15,62 @@ function AddToCart({ isVisible, addToCartClose }: any) {
   return (
     <>
       <div
-      onClick={handleClose} 
-      id="wrapper"
-      className="fixed bg-opacity-5 cursor-all-scroll backdrop-blur-sm inset-0 z-50 shadow-md backdrop:blur overflow-hidden  flex justify-center h-full bg-[#002f34]  antialiased dark:bg-gray-900">
+        onClick={handleClose}
+        id="wrapper"
+        className="fixed bg-opacity-5 cursor-all-scroll backdrop-blur-sm inset-0 z-50 shadow-md backdrop:blur overflow-hidden  flex justify-center h-full bg-[#002f34]  antialiased dark:bg-gray-900"
+      >
         <section
           id="wrapper"
           className=" bg-[#002f34] rounded-2xl overflow-y-auto h-[500px] m-auto w-1/2 antialiased dark:bg-gray-900"
-          
         >
           <div className="p-3   px-4 2xl:px-0">
             <div
               onClick={addToCartClose}
-              className="text-white font-medium text-xl  cursor-pointer"
+              className="text-white font-medium text-xl fixed cursor-pointer"
             >
               X
             </div>
-            {cart.map((data: any) => {
+            <div className="mt-2 sm:mt-8 md:gap-6 lg:flex lg:items-start xl:gap-8">
+              <div className="mx-auto w-full flex-none lg:max-w-2xl xl:max-w-4xl">
+                <div className="space-y-6">
+                  <div className="fixed w-[626px] sm:hidden md:block border-white border m-auto overflow-hidden top-20 flex items-center justify-center rounded-lg shadow-sm bg-[#0d262a] text-white p-4 dark:bg-gray-800 md:p-6">
+                    
+                      <p className="text-base font-bold text-white dark:text-white">
+                        Item
+                      </p>
+                      <label className="sr-only">Choose quantity:</label>
+                      <div className="flex items-center justify-between md:order-3 md:justify-end">
+                        <div className="flex items-center">
+                          <p className="text-base font-bold text-white dark:text-white">
+                            Quentity
+                          </p>
+                        </div>
+                        <div className="text-end md:order-4 md:w-32">
+                          <p className="text-base font-bold text-white dark:text-white">
+                            Price
+                          </p>
+                        </div>
+                      </div>
+
+                      <div className="w-full min-w-0 flex-1 space-y-4 md:order-2 md:max-w-md">
+                        <a
+                          href="#"
+                          className="text-base font-medium text-white hover:underline dark:text-white"
+                        ></a>
+                      </div>
+                    
+                  </div>
+                </div>
+              </div>
+            </div>
+            {cart.map((data: any ) => {
               const { id, title, price, image } = data;
               return (
                 <div
                   key={id}
-                  className="mt-2 sm:mt-8 md:gap-6 lg:flex lg:items-start xl:gap-8"
+                  className="pt-4 sm:mt-8 md:gap-6 lg:flex lg:items-start xl:gap-8"
                 >
-                  <div className="mx-auto w-full flex-none lg:max-w-2xl xl:max-w-4xl">
+                  <div className=" mx-auto w-full flex-none lg:max-w-2xl xl:max-w-4xl">
                     <div className="space-y-6">
                       <div className="rounded-lg shadow-sm bg-[#0d262a] text-white p-4 dark:bg-gray-800 md:p-6">
                         <div className="space-y-4 md:flex md:items-center md:justify-between md:gap-6 md:space-y-0">
@@ -142,6 +177,7 @@ function AddToCart({ isVisible, addToCartClose }: any) {
                               </button>
 
                               <button
+                              onClick={()=>{dispatch(removeCart(id))}}
                                 type="button"
                                 className="inline-flex items-center text-sm font-medium text-red-600 hover:underline dark:text-red-500"
                               >

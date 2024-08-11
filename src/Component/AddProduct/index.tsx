@@ -27,7 +27,7 @@ function AddProduct() {
 
       await Swal.fire({
         icon: "success",
-        title: "You have successfully submitted the form",
+        title: "Your Product is Upload Seccessfully",
         showConfirmButton: false,
         // button: 
       });

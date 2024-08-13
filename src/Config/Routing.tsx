@@ -58,13 +58,3 @@ const router = createBrowserRouter([
   },
 ]);
 
-export default function RouterAdd() {
-  return (
-    <>
-      <RouterProvider router={router} />
-    </>
-  );
-}
-
-//agar login ya signup ke page pe he or user login he to wo navigate ho jae DASHBOARD pe.
-// ager user addproduct pe he or user logout ho to navigate kr de.

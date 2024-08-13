@@ -2,7 +2,7 @@ import { createBrowserRouter, Outlet, RouterProvider, useNavigate } from "react-
 import Dashboard from "../views/Dashboard";
 import Detail from "../views/Detail";
 import AddProduct from "../Component/AddProduct";
-import NavBar from "../Component/NavBar";
+
 import { useEffect, useState } from "react";
 import { onAuthStateChanged } from "firebase/auth";
 import { auth } from "./firebase";
@@ -58,3 +58,13 @@ const router = createBrowserRouter([
   },
 ]);
 
+export default function RouterAdd() {
+  return (
+    <>
+      <RouterProvider router={router} />
+    </>
+  );
+}
+
+//agar login ya signup ke page pe he or user login he to wo navigate ho jae DASHBOARD pe.
+// ager user addproduct pe he or user logout ho to navigate kr de.

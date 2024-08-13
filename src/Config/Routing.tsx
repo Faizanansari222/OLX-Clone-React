@@ -8,10 +8,10 @@ import { onAuthStateChanged } from "firebase/auth";
 import { auth } from "./firebase";
 
 
-const navigate = useNavigate();
 
 export const Main = () => {
   const [user, setUser] = useState();
+  const navigate = useNavigate();
   useEffect(() => {
     onAuthStateChanged(auth, (user: any) => {
       setUser(user);
@@ -19,8 +19,10 @@ export const Main = () => {
   }, []);
   useEffect(() => {
     const pathname = window.location.pathname;
+    console.log(pathname);
+    
     if (user) {
-      if(pathname === '/login' ||pathname === '/register' ){
+      if(pathname === '/login' || pathname === '/register' ){
 
         navigate('/')
       }
@@ -30,7 +32,7 @@ export const Main = () => {
         navigate('/login')
       }
     }
-  }, [window.location.pathname]);
+  }, [window.location.pathname, user]);
 
   return <Outlet/>
 };

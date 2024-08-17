@@ -6,30 +6,28 @@ import DropDown from "../../views/DropDown";
 import { useSelector } from "react-redux";
 
 export default function NavBar(props: any) {
-  const { onClick, onAddToCart } = props;
-  const [user, setUser] = useState<any>();
+  const { onClick, onAddToCart, isVisible } = props;
+  const [userInfo, setUserInfo] = useState<any>();
   const [profileOpen, setProfileOpen] = useState(false);
   const navigate = useNavigate();
-  const cart = useSelector((state:any) => state.cart);
+  const cart = useSelector((state: any) => state.cart);
   // console.log(cart);
 
+  useEffect(() => {}, []);
+
   useEffect(() => {
-    
     onAuthStateChanged(auth, (user) => {
       if (user) {
-        setUser(user);
+        setUserInfo(user);
       }
     });
-  }, [user]);
+  }, [userInfo]);
 
   return (
     <>
       <div>
-        {
-          profileOpen && <DropDown closeFun={() => setProfileOpen(false)}/>
-        }
-      
-      
+        {profileOpen && <DropDown closeFun={() => setProfileOpen(false)} />}
+
         <div className="fixed pt-5 pb-5 top-0 z-10 mb-10 bg-white border-b w-full ">
           <div className="flex gap-8 items-center mb-5">
             <div className="">
@@ -166,25 +164,65 @@ export default function NavBar(props: any) {
             </div>
             <div className="flex items-center  gap-3">
               <div>
-                {user ? (
+                {userInfo ? (
                   <div className=" gap-2 text-[#002f34] flex items-center justify-between">
                     <div className="p-2 hover:bg-blue-100 rounded-full">
-                    <svg className="text-3xl  " xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 256 256"><path fill="currentColor" d="M221.8 175.94c-5.55-9.56-13.8-36.61-13.8-71.94a80 80 0 1 0-160 0c0 35.34-8.26 62.38-13.81 71.94A16 16 0 0 0 48 200h40.81a40 40 0 0 0 78.38 0H208a16 16 0 0 0 13.8-24.06M128 216a24 24 0 0 1-22.62-16h45.24A24 24 0 0 1 128 216m-80-32c7.7-13.24 16-43.92 16-80a64 64 0 1 1 128 0c0 36.05 8.28 66.73 16 80Z"/></svg>
+                      <svg
+                        className="text-3xl  "
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="1em"
+                        height="1em"
+                        viewBox="0 0 256 256"
+                      >
+                        <path
+                          fill="currentColor"
+                          d="M221.8 175.94c-5.55-9.56-13.8-36.61-13.8-71.94a80 80 0 1 0-160 0c0 35.34-8.26 62.38-13.81 71.94A16 16 0 0 0 48 200h40.81a40 40 0 0 0 78.38 0H208a16 16 0 0 0 13.8-24.06M128 216a24 24 0 0 1-22.62-16h45.24A24 24 0 0 1 128 216m-80-32c7.7-13.24 16-43.92 16-80a64 64 0 1 1 128 0c0 36.05 8.28 66.73 16 80Z"
+                        />
+                      </svg>
                     </div>
                     <div className="p-2 hover:bg-blue-100 rounded-full">
                       <button onClick={onAddToCart}>
-                      <h1 className="px-2 rounded-full absolute font-medium text-red-600 top-[76px] right-[200px] ">{cart.length}</h1>
-                      
-                      <svg className="text-3xl" xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 32 32"><path fill="currentColor" d="M29.02 11.754L8.416 9.474L7.16 4.715a.76.76 0 0 0-.727-.558H3.34a1.21 1.21 0 0 0-.963-.49a1.24 1.24 0 1 0 0 2.483c.4 0 .738-.2.965-.492h2.512l5.23 19.8a3.28 3.28 0 0 0-.89 2.242a3.29 3.29 0 0 0 3.292 3.293a3.296 3.296 0 0 0 3.297-3.293a3.2 3.2 0 0 0-.093-.743h5.533a3.3 3.3 0 0 0-.092.743c0 1.82 1.476 3.293 3.296 3.293S28.72 29.52 28.72 27.7a3.296 3.296 0 0 0-3.294-3.297c-.95 0-1.8.41-2.402 1.053h-7.136a3.28 3.28 0 0 0-2.402-1.053c-.38 0-.738.078-1.077.196l-.182-.686H26.81a2.5 2.5 0 0 0 2.39-1.96l1.575-7.798a2 2 0 0 0 .04-.414a1.995 1.995 0 0 0-1.795-1.988zm-3.592 16.24a.3.3 0 0 1-.297-.295c.003-.166.135-.298.298-.298s.295.132.297.297a.3.3 0 0 1-.297.294zm1.78-7.495l.948-.95l-.318 1.58zm-14.453-9.037L13.79 12.5l-1.29 1.29l-1.293-1.29l1.087-1.088zm4.498.498l.538.54l-1.29 1.29l-1.293-1.29l.688-.69l1.358.15zM9.63 14.076l.87-.868l1.29 1.292l-1.29 1.29l-.565-.563l-.304-1.152zm-.295-1.12l-.328-1.24l.785.785zM21.79 16.5l-1.29 1.29l-1.293-1.29l1.292-1.293zm-.583-2l1.292-1.292l1.29 1.292l-1.29 1.292zM18.5 15.79l-1.293-1.29l1.292-1.293l1.29 1.292zm-.71.71l-1.29 1.29l-1.292-1.29l1.292-1.293zm-3.29-.71l-1.293-1.29l1.292-1.293l1.29 1.292zm-.71.71l-1.29 1.29l-1.293-1.29l1.292-1.293zm-3.29.707l1.29 1.292l-.784.783l-.54-2.044l.033-.033zm.802 3.197l1.197-1.197l1.29 1.292l-1.29 1.29l-1.13-1.13zm1.906-1.905l1.29-1.293l1.293 1.292l-1.29 1.29l-1.292-1.29zm3.292.707l1.292 1.292l-1.292 1.29l-1.292-1.29zm.708-.708l1.292-1.293l1.29 1.292l-1.29 1.29zm3.29.707l1.293 1.292l-1.29 1.29l-1.292-1.292zm.71-.708l1.29-1.293l1.293 1.292l-1.29 1.29zm2-2l1.29-1.293l1.293 1.292l-1.29 1.29zm2-2l1.29-1.293L27.79 14.5l-1.29 1.292l-1.293-1.293zm-.71-.708l-1.155-1.156l2.082.23zM21.792 12.5l-1.29 1.292l-1.293-1.292l.29-.29l2.253.25zm-7.29-.71l-.152-.15l.273.03l-.12.12zm-4 .002l-.65-.65l1.17.13zm4 9.415l1.205 1.205h-2.41zm4 0l1.205 1.206h-2.412zm4 0l1.207 1.207h-2.414zm.707-.708l1.292-1.293l1.29 1.292l-1.29 1.29zm2-2l1.292-1.292l1.29 1.29l-1.29 1.293l-1.293-1.29zm3.292-.71l-1.292-1.29l1.29-1.292l.445.444l-.43 2.124l-.014.015zm.5-4.5l-.5.5l-.66-.657l1.017.112c.054.008.1.026.144.044zM13.488 27.993a.297.297 0 0 1 0-.593a.296.296 0 0 1 0 .591zm13.323-5.58h-1.517l1.207-1.207l.93.93c-.187.17-.423.29-.62.277"/></svg>
+                        <h1 className="px-2 rounded-full absolute font-medium text-red-600 top-[76px] right-[200px] ">
+                          {cart.length}
+                        </h1>
+
+                        <svg
+                          className="text-3xl"
+                          xmlns="http://www.w3.org/2000/svg"
+                          width="1em"
+                          height="1em"
+                          viewBox="0 0 32 32"
+                        >
+                          <path
+                            fill="currentColor"
+                            d="M29.02 11.754L8.416 9.474L7.16 4.715a.76.76 0 0 0-.727-.558H3.34a1.21 1.21 0 0 0-.963-.49a1.24 1.24 0 1 0 0 2.483c.4 0 .738-.2.965-.492h2.512l5.23 19.8a3.28 3.28 0 0 0-.89 2.242a3.29 3.29 0 0 0 3.292 3.293a3.296 3.296 0 0 0 3.297-3.293a3.2 3.2 0 0 0-.093-.743h5.533a3.3 3.3 0 0 0-.092.743c0 1.82 1.476 3.293 3.296 3.293S28.72 29.52 28.72 27.7a3.296 3.296 0 0 0-3.294-3.297c-.95 0-1.8.41-2.402 1.053h-7.136a3.28 3.28 0 0 0-2.402-1.053c-.38 0-.738.078-1.077.196l-.182-.686H26.81a2.5 2.5 0 0 0 2.39-1.96l1.575-7.798a2 2 0 0 0 .04-.414a1.995 1.995 0 0 0-1.795-1.988zm-3.592 16.24a.3.3 0 0 1-.297-.295c.003-.166.135-.298.298-.298s.295.132.297.297a.3.3 0 0 1-.297.294zm1.78-7.495l.948-.95l-.318 1.58zm-14.453-9.037L13.79 12.5l-1.29 1.29l-1.293-1.29l1.087-1.088zm4.498.498l.538.54l-1.29 1.29l-1.293-1.29l.688-.69l1.358.15zM9.63 14.076l.87-.868l1.29 1.292l-1.29 1.29l-.565-.563l-.304-1.152zm-.295-1.12l-.328-1.24l.785.785zM21.79 16.5l-1.29 1.29l-1.293-1.29l1.292-1.293zm-.583-2l1.292-1.292l1.29 1.292l-1.29 1.292zM18.5 15.79l-1.293-1.29l1.292-1.293l1.29 1.292zm-.71.71l-1.29 1.29l-1.292-1.29l1.292-1.293zm-3.29-.71l-1.293-1.29l1.292-1.293l1.29 1.292zm-.71.71l-1.29 1.29l-1.293-1.29l1.292-1.293zm-3.29.707l1.29 1.292l-.784.783l-.54-2.044l.033-.033zm.802 3.197l1.197-1.197l1.29 1.292l-1.29 1.29l-1.13-1.13zm1.906-1.905l1.29-1.293l1.293 1.292l-1.29 1.29l-1.292-1.29zm3.292.707l1.292 1.292l-1.292 1.29l-1.292-1.29zm.708-.708l1.292-1.293l1.29 1.292l-1.29 1.29zm3.29.707l1.293 1.292l-1.29 1.29l-1.292-1.292zm.71-.708l1.29-1.293l1.293 1.292l-1.29 1.29zm2-2l1.29-1.293l1.293 1.292l-1.29 1.29zm2-2l1.29-1.293L27.79 14.5l-1.29 1.292l-1.293-1.293zm-.71-.708l-1.155-1.156l2.082.23zM21.792 12.5l-1.29 1.292l-1.293-1.292l.29-.29l2.253.25zm-7.29-.71l-.152-.15l.273.03l-.12.12zm-4 .002l-.65-.65l1.17.13zm4 9.415l1.205 1.205h-2.41zm4 0l1.205 1.206h-2.412zm4 0l1.207 1.207h-2.414zm.707-.708l1.292-1.293l1.29 1.292l-1.29 1.29zm2-2l1.292-1.292l1.29 1.29l-1.29 1.293l-1.293-1.29zm3.292-.71l-1.292-1.29l1.29-1.292l.445.444l-.43 2.124l-.014.015zm.5-4.5l-.5.5l-.66-.657l1.017.112c.054.008.1.026.144.044zM13.488 27.993a.297.297 0 0 1 0-.593a.296.296 0 0 1 0 .591zm13.323-5.58h-1.517l1.207-1.207l.93.93c-.187.17-.423.29-.62.277"
+                          />
+                        </svg>
                       </button>
                     </div>
-                    <div onClick={()=>{setProfileOpen(!profileOpen)}} className="flex items-center">
-                    <img
-                      className="w-10 rounded-full"
-                      src="https://www.olx.com.pk/assets/iconProfilePicture.7975761176487dc62e25536d9a36a61d.png"
-                      alt=""
-                    />
-                    <svg xmlns="http://www.w3.org/2000/svg" className="text-4xl w-16" width="1em" height="1em" viewBox="0 0 24 24"><path fill="currentColor" d="m12 15l-4.243-4.242l1.415-1.414L12 12.172l2.828-2.828l1.415 1.414z"/></svg>
+                    <div
+                      onClick={() => {
+                        setProfileOpen(!profileOpen);
+                      }}
+                      className="flex items-center"
+                    >
+                      <img
+                        className="w-10 rounded-full"
+                        src="https://www.olx.com.pk/assets/iconProfilePicture.7975761176487dc62e25536d9a36a61d.png"
+                        alt=""
+                      />
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        className="text-4xl w-16"
+                        width="1em"
+                        height="1em"
+                        viewBox="0 0 24 24"
+                      >
+                        <path
+                          fill="currentColor"
+                          d="m12 15l-4.243-4.242l1.415-1.414L12 12.172l2.828-2.828l1.415 1.414z"
+                        />
+                      </svg>
                     </div>
                   </div>
                 ) : (
@@ -204,26 +242,43 @@ export default function NavBar(props: any) {
                   src="https://www.olx.com.pk/assets/iconSellBorder_noinline.d9eebe038fbfae9f90fd61d971037e02.svg"
                   alt=""
                 />
-                <button
-                  onClick={() => {
-                    navigate("/addproduct");
-                  }}
-                  className="z-30 absolute gap-1 p-2  flex items-center font-bold text-base text-[#002f34]"
-                >
-                  <svg
-                    className="font-bold "
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="1em"
-                    height="1em"
-                    viewBox="0 0 256 256"
-                  >
-                    <path
-                      fill="currentColor"
-                      d="M228 128a12 12 0 0 1-12 12h-76v76a12 12 0 0 1-24 0v-76H40a12 12 0 0 1 0-24h76V40a12 12 0 0 1 24 0v76h76a12 12 0 0 1 12 12"
-                    />
-                  </svg>
-                  SELL
-                </button>
+                {userInfo ? (
+                  <button
+                  onClick={() => navigate("/addproduct")}
+                  className="z-30 absolute gap-1 p-2  flex items-center font-bold text-base text-[#002f34]">
+                    <svg
+                      className="font-bold "
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="1em"
+                      height="1em"
+                      viewBox="0 0 256 256"
+                    >
+                      <path
+                        fill="currentColor"
+                        d="M228 128a12 12 0 0 1-12 12h-76v76a12 12 0 0 1-24 0v-76H40a12 12 0 0 1 0-24h76V40a12 12 0 0 1 24 0v76h76a12 12 0 0 1 12 12"
+                      />
+                    </svg>
+                    SELL
+                  </button>
+                ) : (
+                  <button
+                  onClick={onClick}
+                  className="z-30 absolute gap-1 p-2  flex items-center font-bold text-base text-[#002f34]">
+                    <svg
+                      className="font-bold "
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="1em"
+                      height="1em"
+                      viewBox="0 0 256 256"
+                    >
+                      <path
+                        fill="currentColor"
+                        d="M228 128a12 12 0 0 1-12 12h-76v76a12 12 0 0 1-24 0v-76H40a12 12 0 0 1 0-24h76V40a12 12 0 0 1 24 0v76h76a12 12 0 0 1 12 12"
+                      />
+                    </svg>
+                    SELL
+                  </button>
+                )}
               </div>
             </div>
           </div>

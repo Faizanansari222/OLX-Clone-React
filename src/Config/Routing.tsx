@@ -17,23 +17,7 @@ export const Main = () => {
       setUser(user);
     });
   }, []);
-  useEffect(() => {
-    const pathname = window.location.pathname;
-    console.log(pathname);
-    
-    if (user) {
-      if(pathname === '/login' || pathname === '/register' ){
-
-        navigate('/')
-      }
-    }else{
-      if (pathname === '/addproduct' || pathname === '/detail/:id') {
-
-        navigate('/login')
-      }
-    }
-  }, [window.location.pathname, user]);
-
+  
   return <Outlet/>
 };
 

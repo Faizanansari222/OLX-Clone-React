@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { addProduct } from "../../Config/firebase";
+import { addProduct, auth, onAuthStateChanged } from "../../Config/firebase";
 import Footer from "../Footer";
 import Swal from "sweetalert2";
 import { useNavigate } from "react-router-dom";
@@ -11,6 +11,7 @@ function AddProduct() {
   const [date, setDate] = useState("");
   const [description, setDescription] = useState("");
   const [image, setImage] = useState(null);
+  
 
   const navigate = useNavigate();
 

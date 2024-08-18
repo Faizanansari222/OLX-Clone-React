@@ -16,7 +16,7 @@ function Dashboard() {
   const [showLogin, setShowLogin] = useState(false);
   const [showRegis, setShowRegis] = useState(false);
   const [showAddToCart, setShowAddToCart] = useState(false);
-  // const navigate = useNavigate();
+  const navigate = useNavigate();
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -71,7 +71,7 @@ function Dashboard() {
                 <>
                 <div
                   key={id}
-                  // onClick={() => navigate(`/detail/${id}`)}
+                  onClick={() => navigate(`/detail/${id}`)}
                   className="h-70 overflow-y-hidden"
                 >
                   <div className="border  h-full m-auto shadow-lg container rounded">

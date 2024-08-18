@@ -6,7 +6,7 @@ import DropDown from "../../views/DropDown";
 import { useSelector } from "react-redux";
 
 export default function NavBar(props: any) {
-  const { onClick, onAddToCart, isVisible } = props;
+  const { onClick, onAddToCart} = props;
   const [userInfo, setUserInfo] = useState<any>();
   const [profileOpen, setProfileOpen] = useState(false);
   const navigate = useNavigate();

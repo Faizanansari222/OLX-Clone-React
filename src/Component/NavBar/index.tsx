@@ -6,7 +6,7 @@ import DropDown from "../../views/DropDown";
 import { useSelector } from "react-redux";
 
 export default function NavBar(props: any) {
-  const { onClick, onAddToCart} = props;
+  const { onClick, onAddToCart } = props;
   const [userInfo, setUserInfo] = useState<any>();
   const [profileOpen, setProfileOpen] = useState(false);
   const navigate = useNavigate();
@@ -29,16 +29,32 @@ export default function NavBar(props: any) {
         {profileOpen && <DropDown closeFun={() => setProfileOpen(false)} />}
 
         <div className="fixed pt-5 pb-5 top-0 z-10 mb-10 bg-white border-b w-full ">
-          <div className="flex gap-8 items-center mb-5">
+          <div className="flex md:gap-8 items-center justify-between md:justify-normal mb-5">
+            <div>
+              <svg
+                className="text-3xl md:hidden"
+                xmlns="http://www.w3.org/2000/svg"
+                width="1em"
+                height="1em"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  fill="currentColor"
+                  fill-rule="evenodd"
+                  d="M3.5 5a1 1 0 0 0 0 2h17a1 1 0 1 0 0-2zm-1 7a1 1 0 0 1 1-1h17a1 1 0 1 1 0 2h-17a1 1 0 0 1-1-1m0 6.001a1 1 0 0 1 1-1h17a1 1 0 1 1 0 2h-17a1 1 0 0 1-1-1"
+                  clip-rule="evenodd"
+                />
+              </svg>
+            </div>
             <div className="">
               <img className="w-14" src={logo} alt="" />
             </div>
-            <div className="flex gap-4">
+            
               <a
-                className="text-base font-bold text-[#002f34] flex gap-2   items-center"
+                className="text-base font-bold text-[#002f34] flex    items-center"
                 href=""
               >
-                <div className="p-1 text-black bg-gradient-to-b text-3xl  from-slate-300 rounded-full">
+                <div className="p-1  bg-gradient-to-b text-4xl  from-slate-300 rounded-full">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     width="1em"
@@ -81,7 +97,7 @@ export default function NavBar(props: any) {
                 className="text-base font-bold text-[#002f34] flex gap-2 items-center"
                 href=""
               >
-                <div className="p-2 text-black bg-gradient-to-b  from-slate-300 rounded-full">
+                <div className="p-2 bg-gradient-to-b  from-slate-300 rounded-full">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     fill="none"
@@ -99,7 +115,7 @@ export default function NavBar(props: any) {
                 </div>
                 Property
               </a>
-            </div>
+            
           </div>
           <div className="flex gap-10 pr-10  items-center justify-around  ">
             <div className="flex gap-3 w-full">
@@ -244,8 +260,9 @@ export default function NavBar(props: any) {
                 />
                 {userInfo ? (
                   <button
-                  onClick={() => navigate("/addproduct")}
-                  className="z-30 absolute gap-1 p-2  flex items-center font-bold text-base text-[#002f34]">
+                    onClick={() => navigate("/addproduct")}
+                    className="z-30 absolute gap-1 p-2  flex items-center font-bold text-base text-[#002f34]"
+                  >
                     <svg
                       className="font-bold "
                       xmlns="http://www.w3.org/2000/svg"
@@ -262,8 +279,9 @@ export default function NavBar(props: any) {
                   </button>
                 ) : (
                   <button
-                  onClick={onClick}
-                  className="z-30 absolute gap-1 p-2  flex items-center font-bold text-base text-[#002f34]">
+                    onClick={onClick}
+                    className="z-30 absolute gap-1 p-2  flex items-center font-bold text-base text-[#002f34]"
+                  >
                     <svg
                       className="font-bold "
                       xmlns="http://www.w3.org/2000/svg"

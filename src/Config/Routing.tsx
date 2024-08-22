@@ -1,31 +1,25 @@
 import { createBrowserRouter, Outlet, RouterProvider, useNavigate } from "react-router-dom";
-import Dashboard from "../views/Dashboard";
 import Detail from "../views/Detail";
+import Dashboard from "../views/Dashboard/index";
 import AddProduct from "../Component/AddProduct";
 
-import { useEffect, useState } from "react";
-import { onAuthStateChanged } from "firebase/auth";
-import { auth } from "./firebase";
 
 
 
-export const Main = () => {
-  const [user, setUser] = useState();
-  const navigate = useNavigate();
-  useEffect(() => {
-    onAuthStateChanged(auth, (user: any) => {
-      setUser(user);
-    });
-  }, []);
+// export const Main = () => {
+//   const [user, setUser] = useState();
+//   // const navigate = useNavigate();
+//   useEffect(() => {
+//     onAuthStateChanged(auth, (user: any) => {
+//       setUser(user);
+//     });
+//   }, []);
   
-  return <Outlet/>
-};
+//   return <Outlet/>
+// };
 
 const router = createBrowserRouter([
-  {
-    path: "/",
-    element: <Main />,
-    children: [
+  
       {
         path: "/",
         element: <Dashboard />,
@@ -39,8 +33,7 @@ const router = createBrowserRouter([
         element: <AddProduct />,
       },
     ],
-  },
-]);
+  );
 
 export default function RouterAdd() {
   return (

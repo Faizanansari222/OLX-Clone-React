@@ -29,10 +29,10 @@ export default function NavBar(props: any) {
         {profileOpen && <DropDown closeFun={() => setProfileOpen(false)} />}
 
         <div className="fixed pt-5 pb-5 top-0 z-10 mb-10 bg-white border-b w-full ">
-          <div className="flex md:gap-8 items-center justify-between md:justify-normal mb-5">
-            <div>
+          <div className="flex md:gap-8 items-center gap-4 md:justify-normal mb-5">
+            <div 
+                className="text-2xl md:hidden text-[#002f34]">
               <svg
-                className="text-3xl md:hidden"
                 xmlns="http://www.w3.org/2000/svg"
                 width="1em"
                 height="1em"
@@ -46,82 +46,78 @@ export default function NavBar(props: any) {
                 />
               </svg>
             </div>
-            <div className="">
-              <img className="w-14" src={logo} alt="" />
+            <div className="w-11 md:w-14">
+              <img className="w-full" src={logo} alt="" />
             </div>
-            
-              <a
-                className="text-base font-bold text-[#002f34] flex    items-center"
-                href=""
-              >
-                <div className="p-1  bg-gradient-to-b text-4xl  from-slate-300 rounded-full">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="1em"
-                    height="1em"
-                    viewBox="0 0 512 512"
-                  >
-                    <path
-                      fill="none"
-                      stroke="currentColor"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      stroke-width="32"
-                      d="m80 224l37.78-88.15C123.93 121.5 139.6 112 157.11 112h197.78c17.51 0 33.18 9.5 39.33 23.85L432 224m-352 0h352v144H80zm32 144v32H80v-32m352 0v32h-32v-32"
-                    />
-                    <circle
-                      cx="144"
-                      cy="288"
-                      r="16"
-                      fill="none"
-                      stroke="currentColor"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      stroke-width="32"
-                    />
-                    <circle
-                      cx="368"
-                      cy="288"
-                      r="16"
-                      fill="none"
-                      stroke="currentColor"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      stroke-width="32"
-                    />
-                  </svg>
-                </div>
-                Motors
-              </a>
-              <a
-                className="text-base font-bold text-[#002f34] flex gap-2 items-center"
-                href=""
-              >
-                <div className="p-2 bg-gradient-to-b  from-slate-300 rounded-full">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    strokeWidth={1.5}
-                    stroke="currentColor"
-                    className="size-6"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      d="M2.25 21h19.5m-18-18v18m10.5-18v18m6-13.5V21M6.75 6.75h.75m-.75 3h.75m-.75 3h.75m3-6h.75m-.75 3h.75m-.75 3h.75M6.75 21v-3.375c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21M3 3h12m-.75 4.5H21m-3.75 3.75h.008v.008h-.008v-.008Zm0 3h.008v.008h-.008v-.008Zm0 3h.008v.008h-.008v-.008Z"
-                    />
-                  </svg>
-                </div>
-                Property
-              </a>
-            
-          </div>
-          <div className="flex gap-10 pr-10  items-center justify-around  ">
-            <div className="flex gap-3 w-full">
-              <div className="text-lg w-1/2 px-3 rounded border border-gray-400  flex items-center">
+
+            <a className="flex items-center gap-2 font-bold text-[#002f34]" href="">
+              <div className="p-2  bg-gradient-to-b text-2xl  from-slate-300 rounded-full">
                 <svg
-                  className="text-3xl mr-1 text-[#002f34]"
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="1em"
+                  height="1em"
+                  viewBox="0 0 512 512"
+                >
+                  <path
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="32"
+                    d="m80 224l37.78-88.15C123.93 121.5 139.6 112 157.11 112h197.78c17.51 0 33.18 9.5 39.33 23.85L432 224m-352 0h352v144H80zm32 144v32H80v-32m352 0v32h-32v-32"
+                  />
+                  <circle
+                    cx="144"
+                    cy="288"
+                    r="16"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="32"
+                  />
+                  <circle
+                    cx="368"
+                    cy="288"
+                    r="16"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="32"
+                  />
+                </svg>
+              </div>
+              Motors
+            </a>
+            <a
+              className="text-base font-bold text-[#002f34] flex gap-2 items-center"
+              href=""
+            >
+              <div className="p-2 bg-gradient-to-b  from-slate-300 rounded-full">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  strokeWidth={1.5}
+                  stroke="currentColor"
+                  className="size-6"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M2.25 21h19.5m-18-18v18m10.5-18v18m6-13.5V21M6.75 6.75h.75m-.75 3h.75m-.75 3h.75m3-6h.75m-.75 3h.75m-.75 3h.75M6.75 21v-3.375c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21M3 3h12m-.75 4.5H21m-3.75 3.75h.008v.008h-.008v-.008Zm0 3h.008v.008h-.008v-.008Zm0 3h.008v.008h-.008v-.008Z"
+                  />
+                </svg>
+              </div>
+              Property
+            </a>
+          </div>
+          <div className="flex gap-10 pr-10  items-center justify-around  w-full">
+            <div className=" sm:flex gap-3 md:flex md:gap-3 sm:w-full md:w-full">
+              <div className="sm:text-lg px-3 sm:rounded sm:border sm:border-gray-400 md:rounded md:border hidden sm:flex md:flex md:border-gray-400  items-center">
+                <svg
+                  className=" sm:text-4xl  text-[#002f34]"
                   xmlns="http://www.w3.org/2000/svg"
                   width="1em"
                   height="1em"
@@ -142,7 +138,7 @@ export default function NavBar(props: any) {
                 />
                 <div className="py-2">
                   <svg
-                    className="text-3xl "
+                    className="sm:text-2xl sm:font-extrabold text-[#002f34] "
                     xmlns="http://www.w3.org/2000/svg"
                     width="1em"
                     height="1em"
@@ -156,7 +152,7 @@ export default function NavBar(props: any) {
                   </svg>
                 </div>
               </div>
-              <div className="text-lg pl-3 rounded w-full border active:border-blue-300 focus:border-blue-300 border-gray-400 flex items-center">
+              <div className="text-lg pl-3 rounded border w-[100%] active:border-blue-300 focus:border-blue-300 border-gray-400 flex items-center">
                 <input
                   className="p-2 w-full outline-none"
                   type="text"
@@ -178,7 +174,7 @@ export default function NavBar(props: any) {
                 </div>
               </div>
             </div>
-            <div className="flex items-center  gap-3">
+            <div className="hidden sm:flex sm:items-center sm:gap-3 md:flex md:items-center  md:gap-3">
               <div>
                 {userInfo ? (
                   <div className=" gap-2 text-[#002f34] flex items-center justify-between">
@@ -254,7 +250,7 @@ export default function NavBar(props: any) {
               </div>
               <div className="flex justify-center items-center">
                 <img
-                  className="z-10 w-32 relative "
+                  className="z-10 sm:m-2 md:m-1 sm:w-32 md:w-28 relative "
                   src="https://www.olx.com.pk/assets/iconSellBorder_noinline.d9eebe038fbfae9f90fd61d971037e02.svg"
                   alt=""
                 />
@@ -264,7 +260,7 @@ export default function NavBar(props: any) {
                     className="z-30 absolute gap-1 p-2  flex items-center font-bold text-base text-[#002f34]"
                   >
                     <svg
-                      className="font-bold "
+                      className="font-bold text-[#002f34]"
                       xmlns="http://www.w3.org/2000/svg"
                       width="1em"
                       height="1em"

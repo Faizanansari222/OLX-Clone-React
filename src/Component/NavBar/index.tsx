@@ -25,14 +25,15 @@ export default function NavBar(props: any) {
 
   return (
     <>
-      <div>
+      <div className="mb-32 sm:mb-0  md:mb-0">
         {profileOpen && <DropDown closeFun={() => setProfileOpen(false)} />}
 
-        <div className="fixed pt-5 pb-5 top-0 z-10 mb-10 bg-white border-b w-full ">
+        <div className="fixed pt-5 pb-5 top-0 z-10 m bg-white border-b w-full ">
           <div className="flex md:gap-8 items-center gap-4 md:justify-normal mb-5">
             <div 
-                className="text-2xl md:hidden text-[#002f34]">
+                className="text-2xl  sm:hidden md:hidden text-[#002f34]">
               <svg
+              className="font-black"
                 xmlns="http://www.w3.org/2000/svg"
                 width="1em"
                 height="1em"
@@ -114,8 +115,8 @@ export default function NavBar(props: any) {
             </a>
           </div>
           <div className="flex gap-10 pr-10  items-center justify-around  w-full">
-            <div className=" sm:flex gap-3 md:flex md:gap-3 sm:w-full md:w-full">
-              <div className="sm:text-lg px-3 sm:rounded sm:border sm:border-gray-400 md:rounded md:border hidden sm:flex md:flex md:border-gray-400  items-center">
+            <div className=" sm:flex gap-3 w-full md:flex md:gap-3 sm:w-full md:w-full">
+              <div className="sm:text-lg px-3  sm:rounded sm:border sm:border-gray-400 md:rounded md:border hidden sm:flex md:flex md:border-gray-400  items-center">
                 <svg
                   className=" sm:text-4xl  text-[#002f34]"
                   xmlns="http://www.w3.org/2000/svg"
@@ -132,7 +133,7 @@ export default function NavBar(props: any) {
                   </g>
                 </svg>
                 <input
-                  className="p-2 w-full outline-none"
+                  className="p-2  outline-none"
                   type="text"
                   placeholder="Location or Compound"
                 />
@@ -297,8 +298,8 @@ export default function NavBar(props: any) {
             </div>
           </div>
         </div>
-        <div className="mt-36 mb-8 flex text-[#002f34]   items-center gap-6">
-          <a href="" className="flex  items-center gap-2 text-sm font-semibold">
+        <div className="hidden sm:text-sm  mt-36 sm:mb-5 md:mb-5 sm:flex md:flex text-[#002f34]   items-center sm:gap-3 md:gap-3">
+          <a href="" className="flex sm:text-sm items-center gap-2 text-sm font-semibold">
             ALL CATEGORIES{" "}
             <svg
               className="text-2xl "

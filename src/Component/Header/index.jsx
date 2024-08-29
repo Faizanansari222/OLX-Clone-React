@@ -9,15 +9,25 @@ export function Header() {
       >
         <div className="flex  rounded-lg  h-full items-center justify-center bg-white dark:bg-gray-700 dark:text-white">
           <img
-            className="w-screen rounded-lg"
+            className="hidden  md:block w-screen rounded-lg"
             src="https://images.olx.com.pk/thumbnails/461235937-800x600.webp"
+            alt=""
+          />
+          <img
+            className="w-screen md:hidden  rounded-lg"
+            src="https://images.olx.com.pk/thumbnails/437508773-800x600.webp"
             alt=""
           />
         </div>
         <div className="flex h-full items-center justify-center bg-white dark:bg-gray-700 dark:text-white">
           <img
-            className="w-screen rounded-lg"
+            className="hidden md:block  w-screen rounded-lg"
             src="https://images.olx.com.pk/thumbnails/461235937-800x600.webp"
+            alt=""
+          />
+          <img
+            className="w-screen md:hidden rounded-lg"
+            src="https://images.olx.com.pk/thumbnails/437508773-800x600.webp"
             alt=""
           />
         </div>

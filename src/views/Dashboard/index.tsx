@@ -63,7 +63,7 @@ function Dashboard() {
         <NavBar onClick={() => setShowLogin(true)} onAddToCart={() => setShowAddToCart(true)} />
         <Header />
         <Category />
-        <div className="grid grid-cols-4 w-full gap-5">
+        <div className="grid  grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 w-full gap-5">
           {fireStoreProducts.length > 0 ? (
             fireStoreProducts.map((item: any) => {
               const { id, price, title, description, image } = item;

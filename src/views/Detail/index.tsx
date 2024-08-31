@@ -76,8 +76,8 @@ export default function Detail() {
   
   return (
     <>
-      <div className="p-5 mb-28 ">
         <NavBar />
+      <div className="p-5 mb-28 ">
         <div key={id} className="flex gap-5  justify-between h-screen">
           <div>
             <div className=" mb-5 rounded-sm h-96 flex justify-center w-[800px] bg-black">

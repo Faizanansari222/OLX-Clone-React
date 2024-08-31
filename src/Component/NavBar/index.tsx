@@ -178,10 +178,10 @@ export default function NavBar(props: any) {
             <div className="hidden sm:flex sm:items-center sm:gap-3 md:flex md:items-center  md:gap-3">
               <div>
                 {userInfo ? (
-                  <div className=" gap-2 text-[#002f34] flex items-center justify-between">
-                    <div className="p-2 hover:bg-blue-100 rounded-full">
+                  <div className=" md:gap-2 sm:gap-2  text-[#002f34] sm:flex sm:items-center  sm:justify-around md:flex md:items-center md:justify-around">
+                    <div className="  hover:bg-blue-100 rounded-full w-full">
                       <svg
-                        className="text-3xl  "
+                        className="sm:text-2xl md:text-3xl  "
                         xmlns="http://www.w3.org/2000/svg"
                         width="1em"
                         height="1em"
@@ -193,14 +193,14 @@ export default function NavBar(props: any) {
                         />
                       </svg>
                     </div>
-                    <div className="p-2 hover:bg-blue-100 rounded-full">
-                      <button onClick={onAddToCart}>
-                        <h1 className="px-2 rounded-full absolute font-medium text-red-600 top-[76px] right-[200px] ">
+                    <div className="p-2 hover:bg-blue-100 rounded-full ">
+                      <button className="" onClick={onAddToCart}>
+                        <h1 className="px-2 rounded-full  font-medium text-red-600 fixed sm:top-[76px]  md:top-[76px]  ">
                           {cart.length}
                         </h1>
 
                         <svg
-                          className="text-3xl"
+                          className="sm:text-2xl md:text-3xl"
                           xmlns="http://www.w3.org/2000/svg"
                           width="1em"
                           height="1em"
@@ -219,14 +219,14 @@ export default function NavBar(props: any) {
                       }}
                       className="flex items-center"
                     >
-                      <img
-                        className="w-10 rounded-full"
+                      <img 
+                        className="md:w-9 sm:w-8  rounded-full  "
                         src="https://www.olx.com.pk/assets/iconProfilePicture.7975761176487dc62e25536d9a36a61d.png"
                         alt=""
                       />
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
-                        className="text-4xl w-16"
+                        className="md:text-4xl sm:text-2xl sm:w-14 md:w-16"
                         width="1em"
                         height="1em"
                         viewBox="0 0 24 24"
@@ -251,14 +251,14 @@ export default function NavBar(props: any) {
               </div>
               <div className="flex justify-center items-center">
                 <img
-                  className="z-10 sm:m-2 md:m-1 sm:w-32 md:w-28 relative "
+                  className="z-10 sm:m-2  md:m-1 sm:hidden md:block md:w-36 relative "
                   src="https://www.olx.com.pk/assets/iconSellBorder_noinline.d9eebe038fbfae9f90fd61d971037e02.svg"
                   alt=""
                 />
                 {userInfo ? (
                   <button
                     onClick={() => navigate("/addproduct")}
-                    className="z-30 absolute gap-1 p-2  flex items-center font-bold text-base text-[#002f34]"
+                    className="z-30  md:text-sm sm:hidden  absolute gap-1 p-2  md:flex md:items-center md:font-bold  text-[#002f34]"
                   >
                     <svg
                       className="font-bold text-[#002f34]"

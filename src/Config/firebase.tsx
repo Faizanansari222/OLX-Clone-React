@@ -46,25 +46,25 @@ export const regisFun = async (
   return addDoc(collection(db, "users"), { email, name });
 };
 
-export const addProduct = async (productInfo: any) => {
-  const { title, price, date, description, image } = productInfo;
+// export const addProduct = async (productInfo: any) => {
+//   const { title, price, date, description, image } = productInfo;
 
-  const storageRef = ref(storage, "images/" + image.name);
+//   const storageRef = ref(storage, "images/" + image.name);
 
-  await uploadBytes(storageRef, image);
+//   await uploadBytes(storageRef, image);
 
-  const url = await getDownloadURL(storageRef);
+//   const url = await getDownloadURL(storageRef);
 
-  return addDoc(collection(db, "ProductDetail"), {
-    title,
-    price,
-    date,
-    description,
-    image: url,
-  });
+//   return addDoc(collection(db, "ProductDetail"), {
+//     title,
+//     price,
+//     date,
+//     description,
+//     image: url,
+//   });
 
-  // console.log(title,price, provence, date, description, image: url );
-};
+//   // console.log(title,price, provence, date, description, image: url );
+// };
 
 export const getData = async () => {
   const querySnapshot = await getDocs(collection(db, "ProductDetail"));
@@ -88,14 +88,32 @@ export const getSingleProduct = async (id: any) => {
     // console.log("Document data:", docSnap.data());
     const product = docSnap.data();
     // data.push(product)
-    return docSnap.data()
+    return docSnap.data();
   } else {
     // docSnap.data() will be undefined in this case
     console.log("No such document!");
   }
   // console.log(data);
-
-  
 };
 
 export { onAuthStateChanged, auth };
+
+export const addProduct = (props: any) => {
+  const { title, price, province, date, description, image } = props;
+  const productData = {
+    title,
+    price,
+    province,
+    date,
+    description,
+    image,
+  };
+  fetch("http://localhost:4007/products/addproduct", {
+    method: "POST",
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ productData }),
+  });
+};

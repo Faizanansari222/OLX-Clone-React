@@ -1,5 +1,6 @@
 import React, { useState } from "react";
-import { addProduct, auth, onAuthStateChanged } from "../../Config/firebase";
+import { addProduct } from "../../Config/firebase";
+// import { addProduct, auth, onAuthStateChanged } from "../../Config/firebase";
 import Footer from "../Footer";
 import Swal from "sweetalert2";
 import { useNavigate } from "react-router-dom";
@@ -11,7 +12,22 @@ function AddProduct() {
   const [date, setDate] = useState("");
   const [description, setDescription] = useState("");
   const [image, setImage] = useState(null);
-  
+
+  // fetch("http://localhost:4007/products/addproduct", {
+  //   method: "POST",
+  //   headers: {
+  //     Accept: "application/json",
+  //     "Content-Type": "application/json",
+  //   },
+  //   body: JSON.stringify({
+  //     title,
+  //     price,
+  //     province,
+  //     date,
+  //     description,
+  //     image,
+  //   }),
+  // });
 
   const navigate = useNavigate();
 
@@ -24,15 +40,14 @@ function AddProduct() {
       return;
     }
     try {
-      await addProduct({ title, price, date, description, image });
-
-      await Swal.fire({
+      await addProduct({ title, price, date, description });
+      Swal.fire({
         icon: "success",
         title: "Your Product is Upload Seccessfully",
         showConfirmButton: false,
-        // button: 
+        // button:
       });
-      navigate("/")
+      navigate("/");
       console.log("Form submitted");
       setTitle("");
       setPrice("");
@@ -40,7 +55,6 @@ function AddProduct() {
       setDate("");
       setDescription("");
       setImage(null);
-      
     } catch (err: any) {
       Swal.fire({
         icon: "error",

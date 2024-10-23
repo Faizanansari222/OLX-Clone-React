@@ -98,7 +98,7 @@ export const getSingleProduct = async (id: any) => {
 
 export { onAuthStateChanged, auth };
 
-export const addProduct = (props: any) => {
+export const  addProduct = async (props: any) => {
   const { title, price, province, date, description, image } = props;
   const productData = {
     title,
@@ -108,12 +108,18 @@ export const addProduct = (props: any) => {
     description,
     image,
   };
-  fetch("http://localhost:4007/products/addproduct", {
-    method: "POST",
-    headers: {
-      Accept: "application/json",
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({ productData }),
-  });
+  // console.log(productData);
+  try{
+   const response =  await fetch("http://localhost:4009/addproduct", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({productData}),
+    });
+console.log(response);
+
+  }catch(err:any){
+    console.log(err.message);
+  }
 };

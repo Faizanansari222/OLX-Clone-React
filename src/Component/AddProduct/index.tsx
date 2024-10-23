@@ -13,7 +13,7 @@ function AddProduct() {
   const [description, setDescription] = useState("");
   const [image, setImage] = useState(null);
 
-  // fetch("http://localhost:4007/products/addproduct", {
+  // fetch("http://localhost:4009/addproduct", {
   //   method: "POST",
   //   headers: {
   //     Accept: "application/json",
@@ -35,7 +35,7 @@ function AddProduct() {
     e.preventDefault();
     console.log(title, price, province, date, description, image);
 
-    if (!title || !price || !province || !date || !description || !image) {
+    if (!title || !price || !province || !date || !description ) {
       Swal.fire("Validation Error", "All fields are required.", "warning");
       return;
     }
@@ -171,6 +171,7 @@ function AddProduct() {
           <div className="flex justify-end mt-6">
             <button
               type="submit"
+              onClick={handleSubmit}
               className="px-6 py-2 leading-5 text-white transition-colors duration-200 transform bg-pink-500 rounded-md hover:bg-pink-700 focus:outline-none focus:bg-gray-600"
             >
               Save

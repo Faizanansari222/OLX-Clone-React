@@ -33,14 +33,14 @@ function AddProduct() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    console.log(title, price, province, date, description, image);
+    // console.log(title, price, province, date, description, image);
 
-    if (!title || !price || !province || !date || !description ) {
+    if (!title || !price || !province || !description || !image ) {
       Swal.fire("Validation Error", "All fields are required.", "warning");
       return;
     }
     try {
-      await addProduct({ title, price, date, description });
+      await addProduct({ title, price, province, description, image});
       Swal.fire({
         icon: "success",
         title: "Your Product is Upload Seccessfully",
@@ -113,7 +113,7 @@ function AddProduct() {
                 <option value="Khyber Pakhtunkhwa">Khyber Pakhtunkhwa</option>
               </select>
             </div>
-            <div>
+            {/* <div>
               <label className="text-white dark:text-gray-200">Date:</label>
               <input
                 value={date}
@@ -121,7 +121,7 @@ function AddProduct() {
                 type="date"
                 className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-[#0f2325] focus:outline-none"
               />
-            </div>
+            </div> */}
             <div>
               <label className="text-white dark:text-gray-200">
                 Description:

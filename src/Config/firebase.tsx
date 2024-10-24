@@ -49,11 +49,7 @@ export const regisFun = async (
 // export const addProduct = async (productInfo: any) => {
 //   const { title, price, date, description, image } = productInfo;
 
-//   const storageRef = ref(storage, "images/" + image.name);
-
-//   await uploadBytes(storageRef, image);
-
-//   const url = await getDownloadURL(storageRef);
+// 
 
 //   return addDoc(collection(db, "ProductDetail"), {
 //     title,
@@ -66,18 +62,20 @@ export const regisFun = async (
 //   // console.log(title,price, provence, date, description, image: url );
 // };
 
-export const getData = async () => {
-  const querySnapshot = await getDocs(collection(db, "ProductDetail"));
-  const products: any = [];
+// export const getData = async () => {
+// await fetch('http://localhost:4009/')
 
-  querySnapshot.forEach((doc) => {
-    const data = doc.data();
-    data.id = doc.id;
-    products.push(data);
-  });
+  // const querySnapshot = await getDocs(collection(db, "ProductDetail"));
+  // const products: any = [];
 
-  return products;
-};
+  // querySnapshot.forEach((doc) => {
+  //   const data = doc.data();
+  //   data.id = doc.id;
+  //   products.push(data);
+  // });
+
+  // return products;
+// };
 
 export const getSingleProduct = async (id: any) => {
   const docRef = doc(db, "ProductDetail", id);
@@ -98,28 +96,31 @@ export const getSingleProduct = async (id: any) => {
 
 export { onAuthStateChanged, auth };
 
-export const  addProduct = async (props: any) => {
+export const addProduct = async (props: any) => {
   const { title, price, province, date, description, image } = props;
+  const storageRef = ref(storage, "images/" + image.name);
+
+    await uploadBytes(storageRef, image);
+  
+    const url = await getDownloadURL(storageRef);
   const productData = {
     title,
     price,
     province,
-    date,
     description,
-    image,
+    image: url,
   };
   // console.log(productData);
-  try{
-   const response =  await fetch("http://localhost:4009/addproduct", {
+  try {
+    const response = await fetch("http://localhost:4009/addproduct", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({productData}),
+      body: JSON.stringify( productData ),
     });
-console.log(response);
-
-  }catch(err:any){
+    console.log(response);
+  } catch (err: any) {
     console.log(err.message);
   }
 };

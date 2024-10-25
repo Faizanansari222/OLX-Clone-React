@@ -77,33 +77,35 @@ export const regisFun = async (
   // return products;
 // };
 
-export const getSingleProduct = async (id: any) => {
-  const docRef = doc(db, "ProductDetail", id);
-  const docSnap = await getDoc(docRef);
-  // const data= []
+// export const getSingleProduct = async (id: any) => {
+//   const docRef = doc(db, "ProductDetail", id);
+//   const docSnap = await getDoc(docRef);
+//   // const data= []
 
-  if (docSnap.exists()) {
-    // console.log("Document data:", docSnap.data());
-    const product = docSnap.data();
-    // data.push(product)
-    return docSnap.data();
-  } else {
-    // docSnap.data() will be undefined in this case
-    console.log("No such document!");
-  }
-  // console.log(data);
-};
+//   if (docSnap.exists()) {
+//     // console.log("Document data:", docSnap.data());
+//     const product = docSnap.data();
+//     // data.push(product)
+//     return docSnap.data();
+//   } else {
+//     // docSnap.data() will be undefined in this case
+//     console.log("No such document!");
+//   }
+//   // console.log(data);
+// };
 
-export { onAuthStateChanged, auth };
 
+
+
+//MongoDB database
 export const addProduct = async (props: any) => {
   const { title, price, province, date, description, image } = props;
   const storageRef = ref(storage, "images/" + image.name);
 
-    await uploadBytes(storageRef, image);
+  await uploadBytes(storageRef, image);
   
     const url = await getDownloadURL(storageRef);
-  const productData = {
+    const productData = {
     title,
     price,
     province,
@@ -112,15 +114,17 @@ export const addProduct = async (props: any) => {
   };
   // console.log(productData);
   try {
-    const response = await fetch("http://localhost:4009/addproduct", {
+    const response = await fetch("http://localhost:4009/olx/api/addproduct", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify( productData ),
     });
-    console.log(response);
+    // console.log(response);
   } catch (err: any) {
     console.log(err.message);
   }
 };
+
+export { onAuthStateChanged, auth };

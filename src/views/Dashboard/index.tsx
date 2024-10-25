@@ -18,30 +18,20 @@ function Dashboard() {
   const [showAddToCart, setShowAddToCart] = useState(false);
   const navigate = useNavigate();
   const dispatch = useDispatch();
-
   useEffect(() => {
-    const fetchData = async () => {
-      await fetch("http://localhost:4009")
-        .then((response) => response.json())
-        .then((data) => {
-          setFireStoreProducts(data);
-          console.log(fireStoreProducts);
-          
-        })
-        .catch((error) => {
-          console.error("Error fetching data: ", error);
-        });
-
-      // try {
-      //   const product = await getData();
-      //   setFireStoreProducts(product);
-      // } catch (error) {
-      //   console.error("Error fetching data: ", error);
-      // }
-    };
-
     fetchData();
   }, []);
+
+  const fetchData = async () => {
+    try {
+      const response = await fetch("http://localhost:4009/olx/api/products");
+      const data = await response.json();
+      setFireStoreProducts(data.productGet);
+      // console.log(data.productGet);
+    } catch (error) {
+      console.error("Error fetching data: ", error);
+    }
+  };
 
   const handleHeartClick = (id: any) => {
     setHeartActive((prev: any) => ({
@@ -80,12 +70,14 @@ function Dashboard() {
         <div className="grid  grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 w-full gap-5">
           {fireStoreProducts.length > 0 ? (
             fireStoreProducts.map((item: any) => {
-              const { id, price, title, description, image } = item;
+              const { _id, title, price, description, image } = item;
+              // console.log(_id);
+              
               return (
                 <>
                   <div
-                    key={id}
-                    onClick={() => navigate(`/detail/${id}`)}
+                    key={_id}
+                    onClick={() => navigate(`/detail/${_id}`)}
                     className="h-70 overflow-y-hidden"
                   >
                     <div className="border  h-full m-auto shadow-lg container rounded">
@@ -111,10 +103,10 @@ function Dashboard() {
                             <button
                               onClick={(e) => {
                                 e.stopPropagation();
-                                handleHeartClick(id);
+                                handleHeartClick(_id);
                               }}
                             >
-                              {heartActive[id] ? (
+                              {heartActive[_id] ? (
                                 <svg
                                   className="text-2xl cursor-pointer text-[#002f34]"
                                   xmlns="http://www.w3.org/2000/svg"
@@ -182,7 +174,7 @@ function Dashboard() {
               );
             })
           ) : (
-            <div className="flex absolute inset-0 justify-center items-center z-50 h-screen  space-x-2 backdrop-blur-md  dark:invert">
+            <div className="flex absolute inset-0 justify-center items-center z-50 flex-1  space-x-2 backdrop-blur-md  dark:invert">
               <span className="sr-only">Loading...</span>
               <div className="h-8 w-8 bg-white rounded-full animate-bounce [animation-delay:-0.3s]"></div>
               <div className="h-8 w-8 bg-white rounded-full animate-bounce [animation-delay:-0.15s]"></div>

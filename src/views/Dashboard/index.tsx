@@ -27,7 +27,7 @@ function Dashboard() {
       const response = await fetch("http://localhost:4009/olx/api/products");
       const data = await response.json();
       setFireStoreProducts(data.productGet);
-      // console.log(data.productGet);
+      console.log(data.productGet);
     } catch (error) {
       console.error("Error fetching data: ", error);
     }
